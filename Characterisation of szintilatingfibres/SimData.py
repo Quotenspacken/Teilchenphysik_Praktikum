@@ -5,7 +5,7 @@ from scipy.optimize import curve_fit
 import pandas as pd
 
 #Simulierte Daten importieren
-df = pd.read_pickle("SimData.pkl")
+df = pd.read_pickle("../../SimData.pkl")
 print(df.columns)
 
 # Radius Faser in mm definieren 
