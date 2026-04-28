@@ -118,5 +118,85 @@ cbar.set_label("Anzahl der Counts")
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/hist2d_clad.pdf')
 
+theta_bins = [(i, i+5) for i in range(0, 40, 5)]
+
+
+theta_centers = []
+lambdas = []
+lambda_errors = []
+
+for theta_min, theta_max in theta_bins:
+    data = df_phy[
+        (df_phy["theta"] >= theta_min) &
+        (df_phy["theta"] < theta_max)
+    ]
+
+    counts = data.groupby("gpsPosX").size()
+
+    # genug Punkte?
+    if len(counts) < 5:
+        print(f"Skipping {theta_min}-{theta_max} (zu wenig Daten)")
+        continue
+
+    x = counts.index.to_numpy()
+    y = counts.to_numpy()
+
+    # nur positive Werte (wegen log)
+    mask = y > 0
+    x = x[mask]
+    y = y[mask]
+
+    if len(y) < 5:
+        print(f"Skipping {theta_min}-{theta_max} (zu wenig valide Punkte)")
+        continue
+
+    # Logarithmieren
+    log_y = np.log(y)
+
+    # Fehler: Poisson → sigma_y = sqrt(y)
+    sigma_y = np.sqrt(y)
+    sigma_log = sigma_y / y   # Fehlerfortpflanzung
+
+    # lineares Modell
+    def lin_model(x, a, b):
+        return a + b * x
+
+    try:
+        popt, pcov = curve_fit(
+            lin_model,
+            x,
+            log_y,
+            sigma=sigma_log,
+            absolute_sigma=True
+        )
+
+        a, b = popt
+
+        Lambda = -1 / b
+        Lambda_err = np.sqrt(pcov[1,1]) / (b**2)
+
+        theta_center = 0.5 * (theta_min + theta_max)
+
+        theta_centers.append(theta_center)
+        lambdas.append(Lambda)
+        lambda_errors.append(Lambda_err)
+
+        print(f"{theta_min:2d}-{theta_max:2d}° : Lambda = {Lambda:.2f} ± {Lambda_err:.2f} mm")
+
+    except RuntimeError:
+        print(f"Fit failed for {theta_min}-{theta_max}")
+
+
+plt.figure(figsize=(7,5))
+
+plt.errorbar(theta_centers, lambdas, yerr=lambda_errors, fmt='o', capsize=4)
+
+plt.xlabel(r"$\theta$ (deg)")
+plt.ylabel(r"$\Lambda_{\mathrm{eff}}$ (mm)")
+plt.legend(loc='best')
+# in matplotlibrc leider (noch) nicht möglich
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/sim.pdf')
+
 
 
