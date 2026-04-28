@@ -1,4 +1,3 @@
-#test
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
@@ -10,7 +9,7 @@ print(df.columns)
 
 # Radius Faser in mm definieren 
 r_fiber = 0.25/2
-
+ 
 # Brechungsindex
 n_core = 1.6
 n_clad1 = 1.49
@@ -62,10 +61,62 @@ plt.axvline(
     color='orange',
     label=r"$\theta_{\mathrm{crit,clad}}$"
 )
-
 plt.xlabel(r"$\theta \mathbin{/} \si{\degree}$")
 plt.ylabel("Anzahl der Photonen")
 plt.legend(loc='best')
 # in matplotlibrc leider (noch) nicht möglich
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/SimData.pdf')
+
+
+#minimaler Abstand zum Faserzentrum
+def r_min_to_x_axis(data):
+    y0 = data["y_start"].to_numpy()
+    z0 = data["z_start"].to_numpy()
+    py = data["py_start"].to_numpy()
+    pz = data["pz_start"].to_numpy()
+
+    numerator = np.abs(y0 * pz - z0 * py)
+    denominator = np.sqrt(py**2 + pz**2)
+
+    # Division durch 0 vermeiden
+    r_min = np.zeros_like(numerator)
+
+    mask = denominator > 0
+    r_min[mask] = numerator[mask] / denominator[mask]
+
+    r_min[~mask] = np.sqrt(y0[~mask]**2 + z0[~mask]**2)
+
+    return r_min
+
+
+# r_min berechnen
+core["r_min"] = r_min_to_x_axis(core)
+clad["r_min"] = r_min_to_x_axis(clad)
+
+# neues Histogramm
+
+plt.figure(figsize=(7,5))
+
+plt.hist2d(core["theta"], core["r_min"], bins=100)
+plt.xlabel(r"$\theta$ (deg)")
+plt.ylabel(r"$r_{\min}$ (mm)")
+cbar = plt.colorbar()
+cbar.set_label("Anzahl der Counts")
+# in matplotlibrc leider (noch) nicht möglich
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/hist2d_core.pdf')
+
+plt.figure(figsize=(7,5))
+
+plt.hist2d(clad["theta"], clad["r_min"], bins=100)
+plt.xlabel(r"$\theta$ (deg)")
+plt.ylabel(r"$r_{\min}$ (mm)")
+cbar = plt.colorbar()
+cbar.set_label("Anzahl der Counts")
+# in matplotlibrc leider (noch) nicht möglich
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/hist2d_clad.pdf')
+
+
+
