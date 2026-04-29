@@ -1,1 +1,63 @@
 *.pkl
+
+# =========================
+# LaTeX build files
+# =========================
+*.aux
+*.log
+*.toc
+*.out
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+
+# bibliography
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
+# index/glossary
+*.idx
+*.ind
+*.ilg
+*.glg
+*.glo
+*.gls
+*.acn
+*.acr
+*.alg
+
+
+# =========================
+# LaTeX Workshop (VS Code)
+# =========================
+.vscode/*
+!.vscode/settings.json
+
+# =========================
+# TeX editors
+# =========================
+*.synctex
+*.cut
+*.tmp
+
+# TeXstudio
+*.tex.backup
+
+# =========================
+# MiKTeX / TeX Live cache
+# =========================
+miktex-log-*
+texput.log
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
