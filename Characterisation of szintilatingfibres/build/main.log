@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.4.12)  28 APR 2026 16:14
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)  (format=lualatex 2026.4.12)  29 APR 2026 21:30
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -1444,43 +1444,101 @@ Package tocbasic Info: character protrusion at toc deactivated on input line 14.
  [2
 
 ] (./content/1_intro.tex) (./content/2_theory.tex) (./content/3_exp_setup_conduction.tex
-<content/Figures/gesamt.png, id=29, 4047.12pt x 3035.34pt>
+<content/Figures/gesamt.png, id=38, 4047.12pt x 3035.34pt>
 File: content/Figures/gesamt.png Graphic file (type png)
 <use content/Figures/gesamt.png>
 Package luatex.def Info: content/Figures/gesamt.png  used on input line 5.
 (luatex.def)             Requested size: 284.52756pt x 213.3755pt.
-) (./content/auswertung.tex) (./content/diskussion.tex)
+) (./content/auswertung.tex
+<build/spectra.pdf, id=44, 433.62pt x 578.16pt>
+File: build/spectra.pdf Graphic file (type pdf)
+<use build/spectra.pdf>
+Package luatex.def Info: build/spectra.pdf  used on input line 9.
+(luatex.def)             Requested size: 284.52756pt x 379.39009pt.
+<build/spectra_dc.pdf, id=46, 433.62pt x 578.16pt>
+File: build/spectra_dc.pdf Graphic file (type pdf)
+<use build/spectra_dc.pdf>
+Package luatex.def Info: build/spectra_dc.pdf  used on input line 17.
+(luatex.def)             Requested size: 284.52756pt x 379.39009pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--22
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--22
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--22
+
+ []
+
+[3<./content/Figures/gesamt.png>] [4<./build/spectra.pdf>]
+<build/radial.pdf, id=95, 417.7206pt x 258.0049pt>
+File: build/radial.pdf Graphic file (type pdf)
+<use build/radial.pdf>
+Package luatex.def Info: build/radial.pdf  used on input line 27.
+(luatex.def)             Requested size: 284.52756pt x 175.73627pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--32
+
+ []
+
+[5<./build/spectra_dc.pdf>]
+<build/SimData.pdf, id=133, 505.89pt x 361.35pt>
+File: build/SimData.pdf Graphic file (type pdf)
+<use build/SimData.pdf>
+Package luatex.def Info: build/SimData.pdf  used on input line 37.
+(luatex.def)             Requested size: 284.52756pt x 203.23682pt.
+<build/hist2d_core_clad.pdf, id=134, 1011.78pt x 361.35pt>
+File: build/hist2d_core_clad.pdf Graphic file (type pdf)
+<use build/hist2d_core_clad.pdf>
+Package luatex.def Info: build/hist2d_core_clad.pdf  used on input line 43.
+(luatex.def)             Requested size: 284.52756pt x 101.61841pt.
+<build/atten.pdf, id=135, 578.16pt x 433.62pt>
+File: build/atten.pdf Graphic file (type pdf)
+<use build/atten.pdf>
+Package luatex.def Info: build/atten.pdf  used on input line 49.
+(luatex.def)             Requested size: 284.52756pt x 213.39536pt.
+<build/intensity.pdf, id=136, 578.16pt x 433.62pt>
+File: build/intensity.pdf Graphic file (type pdf)
+<use build/intensity.pdf>
+Package luatex.def Info: build/intensity.pdf  used on input line 57.
+(luatex.def)             Requested size: 284.52756pt x 213.39536pt.
+) (./content/diskussion.tex [6<./build/radial.pdf>] [7<./build/SimData.pdf><./build/hist2d_core_clad.pdf>] [8<./build/atten.pdf><./build/intensity.pdf>])
 
 LaTeX Warning: Empty bibliography on input line 23.
 
-[3<./content/Figures/gesamt.png>] (./build/main.aux)
+[9] (./build/main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
 Package rerunfilecheck Info: File `main.aux' has not changed.
-(rerunfilecheck)             Checksum: BDD97A37A0209237D9D8E62E62C5D58D;3123.
+(rerunfilecheck)             Checksum: 325CF6F4597C2C93A6A99E239D103383;8786.
 Package rerunfilecheck Info: File `main.toc' has not changed.
-(rerunfilecheck)             Checksum: DEA9A14B19B11EDE0EDF74E252552B6E;444.
+(rerunfilecheck)             Checksum: 60B7D1799DA1B51162F4C364495603DE;772.
 Package logreq Info: Writing requests to 'main.run.xml'.
 
 \openout1 = main.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 38340 strings out of 475900
+ 38516 strings out of 475900
  100000,2373549 words of node,token memory allocated
- 709 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 8 glue, 4 kern, 1 penalty, 3 glyph, 18 attribute, 74 glue_spec, 10 attribute_list, 1 write nodes
-   avail lists: 1:3,2:373,3:132,4:54,5:71,6:18,7:1039,8:2,9:138,10:6,11:104,12:1
- 60345 multiletter control sequences out of 65536+600000
- 81 fonts using 32334551 bytes
- 113i,7n,104p,11225b,2936s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf>
-Output written on main.pdf (3 pages, 16785479 bytes).
+ 714 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 8 glue, 4 kern, 1 penalty, 3 glyph, 18 attribute, 75 glue_spec, 10 attribute_list, 1 write nodes
+   avail lists: 1:3,2:1014,3:223,4:75,5:216,6:34,7:3549,8:16,9:237,10:21,11:386,12:1
+ 60483 multiletter control sequences out of 65536+600000
+ 94 fonts using 36946723 bytes
+ 113i,10n,104p,11225b,2936s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm-math/latinmodern-math.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></usr/local/texlive/2026/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf>
+Output written on main.pdf (9 pages, 17316304 bytes).
 
-PDF statistics: 81 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 1048576)
- 41 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 426 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
+ 27 named destinations out of 1000 (max. 1048576)
+ 73 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -1,2 +1,60 @@
 \section{Auswertung}
 \label{sec:Analysis}
+Diese Auswertung ist unterteilt in eine Spektrometer-Messung in \autoref{sec:spec}, eine Messung über die radiale Symmetrie in \autoref{sec:radial}, die Simulationsergebnisse in \autoref{sec:sim} und die Intensitätsmessung zur Bestimmung der Dämpfungslänge in \autoref{sec:intensity}.
+\subsection{Spektrometer-Messung}
+\label{sec:spec}
+Als erstes wird die Spektrometer-Messung durchgeführt. Das gemessene Signal ist in der \autoref{fig:spectra} eingezeichnet. Die Messung wurde einmal mit Raumlicht gemessen und einmal ohne Raumlicht.\\\\
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm, keepaspectratio]{build/spectra.pdf}
+    \caption{Messungen des Spektrometers mit Raumlicht an und aus.}
+    \label{fig:spectra}
+ \end{figure}
+ Bei der Messung ohne Raumlicht zeigt sich ein klarer Peak bei etwa $\SI{460}{\nano\meter}$ auf der Höhe des Hintergrundrauschens, das hier bei etwa 570 Counts liegt. Bei angeschaltetem Raumlicht zeigt sich ein vielseitigeres Profil mit einem Peak bei einer ähnlichen Wellenlänge von ungefähr $\SI{454}{\nano\meter}$ und einer breiteren Kurve. Bei dem Peak vor dem größeren Lichtspektrum handelt es sich vermutlich nicht direkt um die Diode, auch wenn diese in das Farbspektrum grob passen würde, da die gemessene Intensität bei angeschalteten Raumlicht offensichtlich viel größer ist als die Intensität von der Photodiode ohne Raumlicht.\\\\
+ Als Nächstes werden die "Dark Counts" (DC) von dem gemessenen Signal abgezogen. Das Resultat wird in \autoref{fig:spectra_dc} dargestellt.\\\\
+ \begin{figure}
+    \centering
+    \includegraphics[width=10cm, keepaspectratio]{build/spectra_dc.pdf}
+    \caption{Korrigierte Intensitäten der Messung von \autoref{fig:spectra}, indem die "Dark Counts" (DC) vom Signal abgezogen wurden.}
+    \label{fig:spectra_dc}
+ \end{figure}
+ Ähnlich wie bei der \autoref{fig:spectra} ist der Peak der Photodiode ohne Raumlicht und abgezogenen Dark Counts klar erkennbar. Ist jedoch das Raumlicht eingeschaltet, dann ist eine Verzerrung des Peaks trotz abgezogenen Dark Counts sichtbar, weshalb die folgenden Messungen ohne Raumlicht fortgeführt werden.
+ \subsection{Radiale Messung}
+ \label{sec:radial}
+ Für die radiale Messung wurde der horizontale Winkel $h$ von $\SI{-18}{\degree}$ bis $\SI{34.5}{\degree}$ und der vertikale Winkel $v$ von $\SI{-6}{\degree}$ bis $\SI{34.5}{\degree}$ jeweils eingestellt und mithilfe des Spektrometers für die verschiedenen Wellenlängen $\lambda$ eine jeweilige Intensität ermittelt. Danach wurden alle Intensitäten der verschiedenen Wellenlängen summiert, um eine gesamte Intensität zu bestimmen. Das Resultat ist in der \autoref{fig:radial} in ein zwei-dimensionales Histogramm dargestellt.\\\\
+ \begin{figure}
+    \centering
+    \includegraphics[width=10cm, keepaspectratio]{build/radial.pdf}
+    \caption{Ein zwei-dimensionales Histogramm der gemessenen Intensitäten in Abhängigkeit des horizontalen Winkels $h$ und des vertikalen Winkels $v$.}
+    \label{fig:radial}
+ \end{figure}
+ Es zeigt sich eine klare radiale Symmetrie, die durch die Faser bestimmt wird. Desweiteren nimmt die Intensität mit dem Zentrum nach Außen hin wie erwartet ab.
+ \subsection{Simulation}
+ \label{sec:sim}
+ Die Simulation erstellt einen Datensatz der zunächst auf unphysikalische Photonen gefilert werden muss.
+ \begin{figure}
+    \centering
+    \includegraphics[width=10cm, keepaspectratio]{build/SimData.pdf}
+    \caption{Die simulierten Intensitäten in ein Histogramm gegen den Winkel $\Theta$ aufgetragen.}
+    \label{fig:SimData}
+\end{figure} 
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm, keepaspectratio]{build/hist2d_core_clad.pdf}
+    \caption{Ein zwei-dimensionales Histogramm von den simulierten Intensitäten in Abhängigkeit von dem minimalen Abstand zur Faserachse $r_{\text{min}}$ und dem Winkel $\Theta$.}
+    \label{fig:hist2d}
+\end{figure} 
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm, keepaspectratio]{build/atten.pdf}
+    \caption{Die simulierte Intensität für einen festen horizontalen Winkelintervall $h = \SI{10}{\degree}\pm\SI{2}{\degree}$ und verschiedenen vertikalen Winkelnintervallen $v$ von $\SI{0}{\degree}\pm\SI{2}{\degree}$ bis $\SI{36}{\degree}\pm\SI{2}{\degree}$ und verschiedenen "gpsPosX"-Werten von $\SI{100}{\milli\meter}$ bis $\SI{2400}{\milli\meter}$.}
+    \label{fig:atten}
+\end{figure}
+\subsection{Intensitätsmessung}
+\label{sec:intensity}
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm, keepaspectratio]{build/intensity.pdf}
+    \caption{Die gemessenen Intensitäten für einen festen horizontalen Winkel $h = \SI{10}{\degree}$ und verschiedenen vertikalen Winkeln $v$ von $\SI{0}{\degree}$ bis $\SI{36}{\degree}$ und verschiedenen $x$-Werten von $\SI{0}{\milli\meter}$ bis $\SI{2400}{\milli\meter}$.}
+    \label{fig:intensity}
+\end{figure}
