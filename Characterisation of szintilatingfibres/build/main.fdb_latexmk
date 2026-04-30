@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber build/main"] 1777551988.97716 "build/main.bcf" "build/main.bbl" "build/main" 1777553358.27632 0
-  "build/main.bcf" 1777553357.07992 108026 d5b42ef5814ac6f69e048a11f2b9c50c "lualatex"
+["biber build/main"] 1777551988.97716 "build/main.bcf" "build/main.bbl" "build/main" 1777585596.64192 0
+  "build/main.bcf" 1777585595.60558 108026 d5b42ef5814ac6f69e048a11f2b9c50c "lualatex"
   "lit.bib" 1777533163.75656 149 e1e6355385d222c54a1ea0eed37c9503 ""
   (generated)
   "build/main.bbl"
   "build/main.blg"
   (rewritten before read)
-["lualatex"] 1777553344.32213 "main.tex" "build/main.pdf" "main" 1777553358.27745 0
+["lualatex"] 1777585582.6324 "main.tex" "build/main.pdf" "main" 1777585596.64267 0
   "/Users/robinmoeller/Library/texlive/2026/texmf-var/luatex-cache/generic/fonts/otl/latinmodern-math.luc" 1776006326.89189 637084 e6c6dbffe7a71593100638fd10fd1304 ""
   "/Users/robinmoeller/Library/texlive/2026/texmf-var/luatex-cache/generic/fonts/otl/lmmono10-regular.luc" 1776006515.49639 81837 ec2ed421f8e276f2142e5cde68880e00 ""
   "/Users/robinmoeller/Library/texlive/2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1776006326.21447 128410 1ba271527a2b67439d43c045d339a34f ""
@@ -233,14 +233,14 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1776005228 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/tex/generic/config/language.dat" 1774209518 6843 b47da19a8f71adfd0d5f143e53e45276 ""
   "/usr/local/texlive/2026/texmf-var/web2c/luahbtex/lualatex.fmt" 1776005288 5674530 4459052db41d3a2959242002b591d1eb ""
-  "build/SimData.pdf" 1777550330.0923 15728 91bf3c75fd5f8c705e24e04d73bfd8e8 ""
-  "build/atten.pdf" 1777550381.09404 21326 68abb7a699780920006a06de7f5acf12 ""
-  "build/hist2d_core_clad.pdf" 1777550370.38735 342809 de4b9bc23cd12e06ba110188acff26d7 ""
+  "build/SimData.pdf" 1777585537.04185 15730 55a1b220f57a21d254e51d31410f5247 ""
+  "build/atten.pdf" 1777585581.10705 21326 d4826cf2d5aad404f8b2e5666b8d6844 ""
+  "build/hist2d_core_clad.pdf" 1777585571.64541 344232 0eb57403441e4cddf6ae6aeb57d05c09 ""
   "build/intensity.pdf" 1777550423.36885 22101 c4f9e08b6d995f222ec1e1fec5c73739 ""
-  "build/main.aux" 1777553357.06208 9833 8ad8d3e1785bdec93c78226cb400ab62 "lualatex"
+  "build/main.aux" 1777585595.58085 9833 8ad8d3e1785bdec93c78226cb400ab62 "lualatex"
   "build/main.bbl" 1777551993.96768 1024 1a94a5390e776b92105fad5777d46a0f "biber build/main"
-  "build/main.run.xml" 1777553357.08246 2396 e189e87700d890de7fc36228f7e6118b "lualatex"
-  "build/main.toc" 1777553357.07688 840 21c9b3ff8c15803cb19d3dbce6a4b614 "lualatex"
+  "build/main.run.xml" 1777585595.60892 2396 e189e87700d890de7fc36228f7e6118b "lualatex"
+  "build/main.toc" 1777585595.60177 840 21c9b3ff8c15803cb19d3dbce6a4b614 "lualatex"
   "build/radial.pdf" 1777550401.43154 18945 cd5ed0e5d6d10c4b480905456eebd481 ""
   "build/spectra.pdf" 1777550445.52576 50945 9686824e6b7767d118a923300aa30b4b ""
   "build/spectra_dc.pdf" 1777550452.75041 49654 0dbe4c3fa5f7bfd3cf4f0839b8d074cf ""
@@ -248,7 +248,7 @@
   "content/2_theory.tex" 1777501193.96993 39 b4ace4f0784c0bf939a09d620a0a5a88 ""
   "content/3_exp_setup_conduction.tex" 1777501193.97013 261 716c1221cc658abc0d4405fe948788d4 ""
   "content/Figures/gesamt.png" 1777501194.21686 10788140 f23188499e9fbd6447de213e9260254f ""
-  "content/auswertung.tex" 1777553331.92853 13527 d7ec5c3a73b3cb624f95cb38533a3b88 ""
+  "content/auswertung.tex" 1777573000.83027 14103 a1f29d9e371d25bb0db01ceae5295b68 ""
   "content/diskussion.tex" 1777501194.53546 44 95f46417ab0ce92a2b761cbbead05232 ""
   "header.tex" 1777501194.53657 3686 5bc8773a1b4cb0edcd9b8a8b0912719c ""
   "main.tex" 1777501194.59368 449 811fc6957f13e0fb48c99175a6e141ad ""

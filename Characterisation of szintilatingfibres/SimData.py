@@ -17,7 +17,7 @@ n_clad2 = 1.42
 
 #Kritische Winkel
 theta_core_krit = np.degrees(np.arccos(n_clad1/n_core))
-theta_clad_krit = np.degrees(np.arccos(n_clad2/n_clad1))
+theta_clad_krit = np.degrees(np.arccos(n_clad2/n_core))
 
 #Radialen Exit definieren
 df["r_exit"] = np.sqrt(df["# y_exit"]**2+df["z_exit"]**2)
@@ -94,6 +94,7 @@ core["r_min"] = r_min_to_x_axis(core)
 clad["r_min"] = r_min_to_x_axis(clad)
 
 r_core= 0.22/2 #Core radius 
+r_clad = r_core+0.0075
 
 fig, axs = plt.subplots(2, 1, figsize=(7,10), sharex=False)
 
@@ -112,9 +113,11 @@ def r_min_boundary(theta_deg, theta_krit_deg, r):
 
 # Winkelbereiche für Grenzlinien
 theta_core_line = np.linspace(theta_core_krit, core["theta"].max(), 500)
+theta_clad_line = np.linspace(theta_clad_krit, clad["theta"].max(), 500)
 
 
 r_core_line = r_min_boundary(theta_core_line, theta_core_krit, r_core)
+r_clad_line = r_min_boundary(theta_clad_line, theta_clad_krit, r_clad)
 
 
 
@@ -139,9 +142,17 @@ cbar0.set_label(r"Intensität $\mathbin{/}$ Counts")
 
 # --- Cladding ---
 h1 = axs[1].hist2d(clad["theta"], clad["r_min"], bins=100)
+axs[1].plot(
+    theta_clad_line,
+    r_clad_line,
+    "r--",
+    linewidth=2,
+    label=r"Grenzlinie bei $\theta_{\text{refl}}=\theta_{\text{krit, clad}}$"
+)
 axs[1].set_xlabel(r"$\theta \mathbin{/} \si{\degree}$")
 axs[1].set_ylabel(r"$r_{\min} \mathbin{/} \si{\milli\meter}$")
 axs[1].set_title("Cladding")
+axs[1].legend(loc="upper left")
 
 cbar1 = fig.colorbar(h1[3], ax=axs[1])
 cbar1.set_label(r"Intensität $\mathbin{/}$ Counts")
