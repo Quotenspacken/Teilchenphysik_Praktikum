@@ -16,5 +16,24 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{anleitung}{online}{}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{title}{VXX Vorlage}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://moodle.tu-dortmund.de/course/view.php?id=57211
+      \endverb
+      \verb{url}
+      \verb https://moodle.tu-dortmund.de/course/view.php?id=57211
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

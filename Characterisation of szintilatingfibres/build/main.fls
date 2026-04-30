@@ -265,6 +265,9 @@ INPUT ./build/atten.pdf
 INPUT ./build/intensity.pdf
 INPUT ./build/intensity.pdf
 INPUT ./content/diskussion.tex
+INPUT /Users/robinmoeller/Library/texlive/2026/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-italic.luc
+INPUT /Users/robinmoeller/Library/texlive/2026/texmf-var/luatex-cache/generic/fonts/otl/lmromancaps10-regular.luc
+INPUT /Users/robinmoeller/Library/texlive/2026/texmf-var/luatex-cache/generic/fonts/otl/lmmono10-regular.luc
 INPUT ./build/main.aux
 INPUT ./build/main.aux
 INPUT ./build/main.toc

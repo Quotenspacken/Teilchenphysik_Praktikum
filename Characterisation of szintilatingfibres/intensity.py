@@ -48,8 +48,8 @@ for idx, v in enumerate(v_values):
              label=fr"$v={v}^\circ,\ \Lambda={popt[1]:.0f}\,\mathrm{{mm}}$")
 
 # Achsen & Layout
-plt.xlabel(r"$x \,/\, \mathrm{mm}$")
-plt.ylabel("Intensität")
+plt.xlabel(r"$x \mathbin{/} \si{\milli\meter}$")
+plt.ylabel(r"Intensität $\mathbin{/}$ Counts")
 plt.legend(loc="upper right", fontsize=9)
 plt.title(rf"Messung bei $h={h0}^\circ$")
 

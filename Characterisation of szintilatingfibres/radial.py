@@ -24,9 +24,9 @@ for i, h in enumerate(h_values):
 H, V = np.meshgrid(h_values, v_values, indexing="ij")
 
 plt.pcolormesh(H, V, I_map, shading="auto")
-plt.xlabel("horizontal angle h / deg")
-plt.ylabel("vertical angle v / deg")
-plt.colorbar(label="Intensität")
+plt.xlabel(r"horizontaler Winkel $h \mathbin{/} \si{\degree}$")
+plt.ylabel(r"vertikaler Winkel $v \mathbin{/} \si{\degree}$")
+plt.colorbar(label=r"Intensität $\mathbin{/}$ Counts")
 # in matplotlibrc leider (noch) nicht möglich
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/radial.pdf')
