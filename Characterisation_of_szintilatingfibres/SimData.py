@@ -17,7 +17,7 @@ n_clad2 = 1.42
 
 #Kritische Winkel
 theta_core_krit = np.degrees(np.arccos(n_clad1/n_core))
-theta_clad_krit = np.degrees(np.arccos(n_clad2/n_clad1))
+theta_clad_krit = np.degrees(np.arccos(n_clad2/n_core))
 
 #Radialen Exit definieren
 df["r_exit"] = np.sqrt(df["# y_exit"]**2+df["z_exit"]**2)
@@ -32,12 +32,11 @@ clad = df_phy[df_phy["length_clad"]>0].copy()
 
 # Histogramm
 plt.figure(figsize=(7, 5))
-
 plt.hist(
     core["theta"],
     bins=100,
     histtype="step",
-    label="Core Photons"
+    label="Core Photonen"
 )
 
 plt.hist(
@@ -45,24 +44,24 @@ plt.hist(
     bins=100,
     histtype="step",
     color= "orange",
-    label="Cladding Photons"
+    label="Cladding Photonen"
 )
 
 # kritische Winkel einzeichnen
 plt.axvline(
     theta_core_krit,
     linestyle="--",
-    label=r"$\theta_{\mathrm{crit,core}}$"
+    label=r"$\theta_{\mathrm{krit,core}}$"
 )
 
 plt.axvline(
     theta_clad_krit,
     linestyle="--",
     color='orange',
-    label=r"$\theta_{\mathrm{crit,clad}}$"
+    label=r"$\theta_{\mathrm{krit,clad}}$"
 )
 plt.xlabel(r"$\theta \mathbin{/} \si{\degree}$")
-plt.ylabel("Anzahl der Photonen")
+plt.ylabel(r"Intensität $\mathbin{/}$ Counts")
 plt.legend(loc='best')
 # in matplotlibrc leider (noch) nicht möglich
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
@@ -94,109 +93,162 @@ def r_min_to_x_axis(data):
 core["r_min"] = r_min_to_x_axis(core)
 clad["r_min"] = r_min_to_x_axis(clad)
 
-# neues Histogramm
+r_core= 0.22/2 #Core radius 
+r_clad = r_core+0.0075
 
-plt.figure(figsize=(7,5))
+fig, axs = plt.subplots(2, 1, figsize=(7,10), sharex=False)
 
-plt.hist2d(core["theta"], core["r_min"], bins=100)
-plt.xlabel(r"$\theta$ (deg)")
-plt.ylabel(r"$r_{\min}$ (mm)")
-cbar = plt.colorbar()
-cbar.set_label("Anzahl der Counts")
-# in matplotlibrc leider (noch) nicht möglich
-plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.savefig('build/hist2d_core.pdf')
+# Funktion für Grenzlinie
+def r_min_boundary(theta_deg, theta_krit_deg, r):
+    theta = np.radians(theta_deg)
+    theta_krit = np.radians(theta_krit_deg)
 
-plt.figure(figsize=(7,5))
+    argument = 1 - (np.sin(theta_krit)**2 / np.sin(theta)**2)
 
-plt.hist2d(clad["theta"], clad["r_min"], bins=100)
-plt.xlabel(r"$\theta$ (deg)")
-plt.ylabel(r"$r_{\min}$ (mm)")
-cbar = plt.colorbar()
-cbar.set_label("Anzahl der Counts")
-# in matplotlibrc leider (noch) nicht möglich
-plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.savefig('build/hist2d_clad.pdf')
+    # unphysikalische Werte vermeiden
+    argument = np.where(argument >= 0, argument, np.nan)
 
-theta_bins = [(i, i+5) for i in range(0, 40, 5)]
+    return r * np.sqrt(argument)
 
 
-theta_centers = []
-lambdas = []
-lambda_errors = []
+# Winkelbereiche für Grenzlinien
+theta_core_line = np.linspace(theta_core_krit, core["theta"].max(), 500)
+theta_clad_line = np.linspace(theta_clad_krit, clad["theta"].max(), 500)
 
-for theta_min, theta_max in theta_bins:
+
+r_core_line = r_min_boundary(theta_core_line, theta_core_krit, r_core)
+r_clad_line = r_min_boundary(theta_clad_line, theta_clad_krit, r_clad)
+
+
+
+# --- Core ---
+h0 = axs[0].hist2d(core["theta"], core["r_min"], bins=100)
+axs[0].plot(
+    theta_core_line,
+    r_core_line,
+    "r--",
+    linewidth=2,
+    label=r"Grenzlinie bei $\theta_{\text{refl}}=\theta_{\text{krit, core}}$"
+)
+
+axs[0].set_xlabel(r"$\theta \mathbin{/} \si{\degree}$")
+axs[0].set_ylabel(r"$r_{\min} \mathbin{/} \si{\milli\meter}$")
+axs[0].set_title("Core")
+axs[0].legend(loc="upper left")
+
+cbar0 = fig.colorbar(h0[3], ax=axs[0])
+cbar0.set_label(r"Intensität $\mathbin{/}$ Counts")
+
+
+# --- Cladding ---
+h1 = axs[1].hist2d(clad["theta"], clad["r_min"], bins=100)
+axs[1].plot(
+    theta_clad_line,
+    r_clad_line,
+    "r--",
+    linewidth=2,
+    label=r"Grenzlinie bei $\theta_{\text{refl}}=\theta_{\text{krit, clad}}$"
+)
+axs[1].set_xlabel(r"$\theta \mathbin{/} \si{\degree}$")
+axs[1].set_ylabel(r"$r_{\min} \mathbin{/} \si{\milli\meter}$")
+axs[1].set_title("Cladding")
+axs[1].legend(loc="upper left")
+
+cbar1 = fig.colorbar(h1[3], ax=axs[1])
+cbar1.set_label(r"Intensität $\mathbin{/}$ Counts")
+
+plt.tight_layout()
+plt.savefig('build/hist2d_core_clad.pdf')
+
+######## Attenuation length ##########
+# Winkel berechnen
+df_phy["h"] = np.degrees(np.arctan2(df_phy["py_start"], df_phy["px_start"]))
+df_phy["v"] = np.degrees(np.arctan2(df_phy["pz_start"], df_phy["px_start"]))
+
+# fixes h
+h0 = 10
+dh = 2
+
+# v-Werte
+v_values = np.arange(0, 37, 4)
+dv = 2
+
+# Fit-Funktion
+def exp_model(x, I0, Lambda):
+    return I0 * np.exp(-x / Lambda)
+
+# Colormap (rot-Verlauf)
+cmap = plt.cm.Reds
+colors = cmap(np.linspace(0.3, 1, len(v_values)))
+
+plt.figure(figsize=(8,6))
+
+for v0, color in zip(v_values, colors):
+
+    # Daten filtern
     data = df_phy[
-        (df_phy["theta"] >= theta_min) &
-        (df_phy["theta"] < theta_max)
+        (df_phy["h"] >= h0 - dh) & (df_phy["h"] < h0 + dh) &
+        (df_phy["v"] >= v0 - dv) & (df_phy["v"] < v0 + dv)
     ]
 
-    counts = data.groupby("gpsPosX").size()
-
-    # genug Punkte?
-    if len(counts) < 5:
-        print(f"Skipping {theta_min}-{theta_max} (zu wenig Daten)")
+    if len(data) < 10:
         continue
+
+    # Counts bestimmen
+    counts = data.groupby("gpsPosX").size()
 
     x = counts.index.to_numpy()
     y = counts.to_numpy()
 
-    # nur positive Werte (wegen log)
-    mask = y > 0
-    x = x[mask]
-    y = y[mask]
+    # sortieren
+    idx = np.argsort(x)
+    x = x[idx]
+    y = y[idx]
 
-    if len(y) < 5:
-        print(f"Skipping {theta_min}-{theta_max} (zu wenig valide Punkte)")
+    # nur sinnvolle Punkte (kein log-Fit nötig, aber stabiler)
+    if len(x) < 5:
         continue
 
-    # Logarithmieren
-    log_y = np.log(y)
-
-    # Fehler: Poisson → sigma_y = sqrt(y)
-    sigma_y = np.sqrt(y)
-    sigma_log = sigma_y / y   # Fehlerfortpflanzung
-
-    # lineares Modell
-    def lin_model(x, a, b):
-        return a + b * x
-
+    # Fit
     try:
         popt, pcov = curve_fit(
-            lin_model,
+            exp_model,
             x,
-            log_y,
-            sigma=sigma_log,
-            absolute_sigma=True
+            y,
+            p0=[np.max(y), 3000],
+            maxfev=10000
         )
 
-        a, b = popt
+        I0_fit, Lambda_fit = popt
+        Lambda_err = np.sqrt(np.diag(pcov))[1]
 
-        Lambda = -1 / b
-        Lambda_err = np.sqrt(pcov[1,1]) / (b**2)
+    except:
+        continue
 
-        theta_center = 0.5 * (theta_min + theta_max)
+    # Fitkurve
+    x_fit = np.linspace(np.min(x), np.max(x), 300)
+    y_fit = exp_model(x_fit, I0_fit, Lambda_fit)
 
-        theta_centers.append(theta_center)
-        lambdas.append(Lambda)
-        lambda_errors.append(Lambda_err)
+    # Plot: Punkte + Linie gleiche Farbe
+    plt.plot(x, y, "o", color=color)
+    plt.plot(
+        x_fit,
+        y_fit,
+        "-",
+        color=color,
+        label=rf"$v={v0}^\circ$: $\Lambda={Lambda_fit:.0f}\,\mathrm{{mm}}$"
+    )
 
-        print(f"{theta_min:2d}-{theta_max:2d}° : Lambda = {Lambda:.2f} ± {Lambda_err:.2f} mm")
+plt.xlabel(r"$x = \mathrm{gpsPosX} \,/\, \mathrm{mm}$")
+plt.ylabel(r"Intensität $\mathbin{/}$ Counts")
+plt.title(rf"Simulation für $h={h0}^\circ \pm {dh}^\circ$")
 
-    except RuntimeError:
-        print(f"Fit failed for {theta_min}-{theta_max}")
+plt.legend(loc="upper right", fontsize=9)
 
+plt.tight_layout()
 
-plt.figure(figsize=(7,5))
+plt.savefig("build/atten.pdf")
 
-plt.errorbar(theta_centers, lambdas, yerr=lambda_errors, fmt='o', capsize=4)
-
-plt.xlabel(r"$\theta$ (deg)")
-plt.ylabel(r"$\Lambda_{\mathrm{eff}}$ (mm)")
-plt.legend(loc='best')
-# in matplotlibrc leider (noch) nicht möglich
-plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.savefig('build/sim.pdf')
 
 
 
