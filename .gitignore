@@ -15,6 +15,9 @@
 *.synctex(busy)
 *.synctex.gz(busy)
 *.pdf
+*DS_Store
+*.dvi
+*.ps
 
 # bibliography
 *.bbl
