@@ -14,6 +14,7 @@
 *.synctex.gz
 *.synctex(busy)
 *.synctex.gz(busy)
+*.pdf
 
 # bibliography
 *.bbl
