@@ -1,22 +1,16 @@
 \section{Versuchsaufbau und Durchführung}
 \label{sec:experimental_setup_and_conduction}
-Dieses Experiment soll die Funktionsweise der szintillierenden Fasern in dem LHCb-Detektor beschreiben. 
-Der Versuchsaufbau besteht aus drei zentralen Komponenten.
-Einer szintillierenden Faser,
-einer LED als Lichtquelle sowie einem Spektrometer,
-am Ende der Faserzur Lichtdetektion. 
-Die LED ist horizontal entlang der Faser verschiebbar, 
-sodass die Faser an verschiedenen Positionen angeregt werden kann.
-Das Spektrometer ist an einem motorisierten Halter befestigt, 
-der eine Positionierung unter verschiedenen horizontalen und vertikalen Winkeln relativ zum Faserende ermöglicht. 
-Sowohl die Motoren als auch die LED und das Spektrometer werden über eine dedizierte Steuersoftware geregelt.
-Ein Foto des gesamten Aufbaus ist in der \autoref{fig:setup} dargestellt.
+\subsection{Versuchsaufbau}
+\label{sec:versuchsaufbau}
+Dieses Experiment soll die Funktionsweise der szintillierenden Fasern in dem LHCb-Detektor beschreiben. Dabei befindet sich eine gespannte Faser, an dessen Ende sich ein Spektrometer auf einem Motor befindet, der verschiedene vertikale Winkel $v$ und horizontale Winkel $h$ einstellen kann.  Die Faser wird unterteilt in einen Kern (''Core'') mit einem Durchmesser von $\SI{220}{\micro\meter}$ und zwei Ummantelungen (''Cladding'') mit einer Dicke von $\SI{7.5}{\micro\meter}$. Ebenso befindet sich dazwischen eine Photodiode auf einem beweglichen Motor, der verschiedene $x$-Positionen abfährt. Der allgemeine Aufbau ist in der \autoref{fig:setup} dargestellt.
 \begin{figure}
     \centering
     \includegraphics[width=10cm, keepaspectratio]{content/Figures/gesamt.png}
     \caption{Aufbau einer szintillierenden Faser mit einer Photodiode und einem Spektrometer.}
     \label{fig:setup}
  \end{figure}
+Das ganze Experiment wird mit einer bestimmten Software über einen Computer gesteuert. Desweiteren wird über den Computer eine Simulation erstellt, die die Ergebnisse der Messung simulieren soll. Diese Simulation ermittelt dabei die $y$- und $z$-Koordinaten, wo die simulierten Photonen die Faser am Faserende verlassen haben, die $x$-, $y$- und $z$-Startposition, wo die Photonen in der Faser erzeugt werden, genauso wie die Startimpulsbeiträge $p_x$, $p_y$ und $p_z$, die Anzahl an Reflexionen im Kern und Mantel ''reflCoCl'' und ''reflClCl'', die Wellenlänge $\lambda$, die $x$-Position wo das primäre Teilchen zur Anregung der Faser erzeugt wurde ''gpsPosX'', die zurückgelegte Strecke im Kern und Mantel ''length\_core'' und ''length\_clad'' und die Anzahl an Rayleigh Streuprozesse ''rayleighScatterings''.
+
  \subsection{Versuchsdurchführung}
 \label{sec:versuchsdurchführung}
 

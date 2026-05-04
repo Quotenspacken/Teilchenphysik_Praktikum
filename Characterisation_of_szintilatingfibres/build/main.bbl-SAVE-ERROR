@@ -19,21 +19,188 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
-    \entry{anleitung}{online}{}{}
+    \entry{Anleitung}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=28f103791c332f1ae09e89441b05d8cd}{%
+           family={Dortmund},
+           familyi={D\bibinitperiod},
+           given={Technische\bibnamedelima Universität},
+           giveni={T\bibinitperiod\bibinitdelim U\bibinitperiod}}}%
+      }
+      \strng{namehash}{28f103791c332f1ae09e89441b05d8cd}
+      \strng{fullhash}{28f103791c332f1ae09e89441b05d8cd}
+      \strng{fullhashraw}{28f103791c332f1ae09e89441b05d8cd}
+      \strng{bibnamehash}{28f103791c332f1ae09e89441b05d8cd}
+      \strng{authorbibnamehash}{28f103791c332f1ae09e89441b05d8cd}
+      \strng{authornamehash}{28f103791c332f1ae09e89441b05d8cd}
+      \strng{authorfullhash}{28f103791c332f1ae09e89441b05d8cd}
+      \strng{authorfullhashraw}{28f103791c332f1ae09e89441b05d8cd}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Measurement of scintillating fibres for the LHCb experiment - Lab Course E5a}
-      \field{year}{2026}
+      \field{title}{Measurement of scintillating fibres for the LHCbexperiment Lab Course E5a}
+    \endentry
+    \entry{TDR}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=94e8e84704e47bdcd3157b50586a7a88}{%
+           family={collaboration},
+           familyi={c\bibinitperiod},
+           given={LHCb},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {CERN}%
+      }
+      \list{location}{1}{%
+        {Geneva}%
+      }
+      \strng{namehash}{94e8e84704e47bdcd3157b50586a7a88}
+      \strng{fullhash}{94e8e84704e47bdcd3157b50586a7a88}
+      \strng{fullhashraw}{94e8e84704e47bdcd3157b50586a7a88}
+      \strng{bibnamehash}{94e8e84704e47bdcd3157b50586a7a88}
+      \strng{authorbibnamehash}{94e8e84704e47bdcd3157b50586a7a88}
+      \strng{authornamehash}{94e8e84704e47bdcd3157b50586a7a88}
+      \strng{authorfullhash}{94e8e84704e47bdcd3157b50586a7a88}
+      \strng{authorfullhashraw}{94e8e84704e47bdcd3157b50586a7a88}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Framework TDR for the LHCb Upgrade II: Opportunities in flavour physics, and beyond, in the HL-LHC era}}
+      \field{type}{techreport}
+      \field{year}{2021}
       \field{dateera}{ce}
       \verb{urlraw}
-      \verb https://moodle.tu-dortmund.de/pluginfile.php/3630496/mod_resource/content/1/labcourse.pdf
+      \verb https://cds.cern.ch/record/2776420
       \endverb
       \verb{url}
-      \verb https://moodle.tu-dortmund.de/pluginfile.php/3630496/mod_resource/content/1/labcourse.pdf
+      \verb https://cds.cern.ch/record/2776420
       \endverb
     \endentry
+    \entry{bbangles}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=ddd45d6d45156e23cd62072429362fde}{%
+           family={E.},
+           familyi={E\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{ddd45d6d45156e23cd62072429362fde}
+      \strng{fullhash}{ddd45d6d45156e23cd62072429362fde}
+      \strng{fullhashraw}{ddd45d6d45156e23cd62072429362fde}
+      \strng{bibnamehash}{ddd45d6d45156e23cd62072429362fde}
+      \strng{authorbibnamehash}{ddd45d6d45156e23cd62072429362fde}
+      \strng{authornamehash}{ddd45d6d45156e23cd62072429362fde}
+      \strng{authorfullhash}{ddd45d6d45156e23cd62072429362fde}
+      \strng{authorfullhashraw}{ddd45d6d45156e23cd62072429362fde}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{$\overline{b}b$ production angle plots}
+      \verb{urlraw}
+      \verb {\href{https://lhcb.web.cern.ch/lhcb/speakersbureau/html/bb\_ProductionAngles.html}{https://lhcb.web.cern.ch/lhcb/speakersbureau/html/bb\_ProductionAngles.html}}
+      \endverb
+      \verb{url}
+      \verb %7B%5Chref%7Bhttps://lhcb.web.cern.ch/lhcb/speakersbureau/html/bb%5C_ProductionAngles.html%7D%7Bhttps://lhcb.web.cern.ch/lhcb/speakersbureau/html/bb%5C_ProductionAngles.html%7D%7D
+      \endverb
+      \warn{\item online entry 'bbangles' (lit.bib): Invalid format '{06.02.2025}' of date field 'urldate' - ignoring}
+    \endentry
+    \entry{Gruber2020}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=b9ded32a88a8a005a3d19eb472e63d7f}{%
+           family={Gruber},
+           familyi={G\bibinitperiod},
+           given={Lukas},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \strng{fullhash}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \strng{fullhashraw}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \strng{bibnamehash}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \strng{authorbibnamehash}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \strng{authornamehash}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \strng{authorfullhash}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \strng{authorfullhashraw}{b9ded32a88a8a005a3d19eb472e63d7f}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment}
+      \field{title}{LHCb SciFi — Upgrading LHCb with a scintillating fibre tracker}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.nima.2019.03.080
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S016890021930422X
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S016890021930422X
+      \endverb
+    \endentry
+    \entry{Collaboration2014}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=160e40430227f5a4cdc333d8eeaa87ec}{%
+           family={Collaboration},
+           familyi={C\bibinitperiod},
+           given={LHCb},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{160e40430227f5a4cdc333d8eeaa87ec}
+      \strng{fullhash}{160e40430227f5a4cdc333d8eeaa87ec}
+      \strng{fullhashraw}{160e40430227f5a4cdc333d8eeaa87ec}
+      \strng{bibnamehash}{160e40430227f5a4cdc333d8eeaa87ec}
+      \strng{authorbibnamehash}{160e40430227f5a4cdc333d8eeaa87ec}
+      \strng{authornamehash}{160e40430227f5a4cdc333d8eeaa87ec}
+      \strng{authorfullhash}{160e40430227f5a4cdc333d8eeaa87ec}
+      \strng{authorfullhashraw}{160e40430227f5a4cdc333d8eeaa87ec}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{LHCb Tracker Upgrade Technical Design Report}}
+      \field{type}{techreport}
+      \field{year}{2014}
+      \verb{doi}
+      \verb 10.17181/CERN.OOOE.9O9T
+      \endverb
+      \verb{urlraw}
+      \verb https://cds.cern.ch/record/1647400
+      \endverb
+      \verb{url}
+      \verb https://cds.cern.ch/record/1647400
+      \endverb
+    \endentry
+    \entry{Lukas}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=42ffa7ab3f0cfaa8bfcf56d07ebbae1f}{%
+           family={Wittola},
+           familyi={W\bibinitperiod},
+           given={Lukas},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \strng{fullhash}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \strng{fullhashraw}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \strng{bibnamehash}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \strng{authorbibnamehash}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \strng{authornamehash}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \strng{authorfullhash}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \strng{authorfullhashraw}{42ffa7ab3f0cfaa8bfcf56d07ebbae1f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{DISSERTATION}
+      \field{title}{Commissioning, Calibration and EarlyPerformance of the LHCb Scintillating FibreTracker}
+      \field{year}{2024}
+      \field{dateera}{ce}
+    \endentry
   \enddatalist
+  \missing{anleitung}
 \endrefsection
 \endinput
 
