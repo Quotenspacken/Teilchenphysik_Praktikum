@@ -51,7 +51,7 @@ for idx, v in enumerate(v_values):
 plt.xlabel(r"$x \mathbin{/} \si{\milli\meter}$")
 plt.ylabel(r"Intensität $\mathbin{/}$ Counts")
 plt.legend(loc="upper right", fontsize=9)
-plt.title(rf"Messung bei $h={h0}^\circ$")
+
 
 # Layout fix (wie bei dir)
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
