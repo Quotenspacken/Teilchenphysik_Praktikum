@@ -19,6 +19,10 @@ n_clad2 = 1.42
 theta_core_krit = np.degrees(np.arccos(n_clad1/n_core))
 theta_clad_krit = np.degrees(np.arccos(n_clad2/n_core))
 
+print(theta_clad_krit)
+print(theta_core_krit)
+
+
 #Radialen Exit definieren
 df["r_exit"] = np.sqrt(df["# y_exit"]**2+df["z_exit"]**2)
 
@@ -162,50 +166,43 @@ plt.savefig('build/hist2d_core_clad.pdf')
 
 ######## Attenuation length ##########
 # Winkel berechnen
-df_phy["h"] = np.degrees(np.arctan2(df_phy["py_start"], df_phy["px_start"]))
-df_phy["v"] = np.degrees(np.arctan2(df_phy["pz_start"], df_phy["px_start"]))
-
-# fixes h
-h0 = 10
-dh = 2
-
-# v-Werte
-v_values = np.arange(0, 37, 4)
-dv = 2
+# theta-Werte
+theta_values = np.arange(0, 37, 4)
+dtheta = 2
 
 # Fit-Funktion
 def exp_model(x, I0, Lambda):
     return I0 * np.exp(-x / Lambda)
 
-# Colormap (rot-Verlauf)
+# Colormap
 cmap = plt.cm.Reds
-colors = cmap(np.linspace(0.3, 1, len(v_values)))
+colors = cmap(np.linspace(0.3, 1, len(theta_values)))
 
-plt.figure(figsize=(8,6))
+plt.figure(figsize=(8, 6))
 
-for v0, color in zip(v_values, colors):
+for theta0, color in zip(theta_values, colors):
 
     # Daten filtern
     data = df_phy[
-        (df_phy["h"] >= h0 - dh) & (df_phy["h"] < h0 + dh) &
-        (df_phy["v"] >= v0 - dv) & (df_phy["v"] < v0 + dv)
+        (df_phy["theta"] >= theta0 - dtheta) &
+        (df_phy["theta"] <  theta0 + dtheta)
     ]
 
     if len(data) < 10:
         continue
 
-    # Counts bestimmen
+    # Counts pro Anregungsort bestimmen
     counts = data.groupby("gpsPosX").size()
 
     x = counts.index.to_numpy()
     y = counts.to_numpy()
 
-    # sortieren
+    # nach x sortieren
     idx = np.argsort(x)
     x = x[idx]
     y = y[idx]
 
-    # nur sinnvolle Punkte (kein log-Fit nötig, aber stabiler)
+    # genügend Punkte für Fit?
     if len(x) < 5:
         continue
 
@@ -222,33 +219,30 @@ for v0, color in zip(v_values, colors):
         I0_fit, Lambda_fit = popt
         Lambda_err = np.sqrt(np.diag(pcov))[1]
 
-    except:
+    except RuntimeError:
         continue
 
     # Fitkurve
     x_fit = np.linspace(np.min(x), np.max(x), 300)
     y_fit = exp_model(x_fit, I0_fit, Lambda_fit)
 
-    # Plot: Punkte + Linie gleiche Farbe
+    # Plot: Punkte + Fitlinie
     plt.plot(x, y, "o", color=color)
     plt.plot(
         x_fit,
         y_fit,
         "-",
         color=color,
-        label=rf"$v={v0}^\circ$: $\Lambda={Lambda_fit:.0f}\,\mathrm{{mm}}$"
+        label=rf"$\Theta={theta0}^\circ \pm {dtheta}^\circ$: "
+              rf"$\Lambda={Lambda_fit:.0f}\,\mathrm{{mm}}$"
     )
 
 plt.xlabel(r"$x = \mathrm{gpsPosX} \,/\, \mathrm{mm}$")
 plt.ylabel(r"Intensität $\mathbin{/}$ Counts")
-plt.title(rf"Simulation für $h={h0}^\circ \pm {dh}^\circ$")
+plt.title(r"Simulation für verschiedene Winkel $\Theta$ zur Faserachse")
 
 plt.legend(loc="upper right", fontsize=9)
-
 plt.tight_layout()
 
 plt.savefig("build/atten.pdf")
-
-
-
 
