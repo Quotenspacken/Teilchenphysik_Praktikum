@@ -1,11 +1,11 @@
 \section{Theorie}
 \label{sec:theory}
 Der LHCb Detektor ist einer der vier großen Detektoren am Large Hadron Collider (LHC) der European Organization for Nuclear Research (CERN).
-Er untersuchtProton-Proton-Kollisionen, 
+Er untersucht unter anderem Proton-Proton-Kollisionen, 
 die am LHC bei einer Schwerpunktsenergie von bis zu $13.6$ TeV stattfinden \cite{Anleitung}.
 Dafür ist der LHCb Detektor unteranderem mit einem Spektrometersystem ausgestattet,
 das es ermöglicht den Impuls von geladenen Teilchen zu bestimmen.
-Die dafür benötigte Hauptspurenkammer ist der Scintillating Fibre Tracker (SciFi).
+Die dafür benötigte Hauptspurenkammer ist der Scintillating Fibre Tracker (SciFi Tracker).
 Er dedektiert die geleadenen Teilchen durch in szintilierende Fasern entstehende Photonen.
 Das verhalten der Photonen in den Fasern soll in Kapittel~\ref{sec:Analysis} charakterisiert werden.
 Dazu wird nachdem in Abschnit~\ref{sec:LHCb} und \ref{sec:SciFi} der LHCb Detektor und besonders der SciFi Detektor genauer beschrieben wurde,
@@ -17,8 +17,8 @@ in Abschnitt~\ref{sec:szintilierende_Fasern} die Funktionsweise der szintilieren
 \label{sec:LHCb}
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{content/Figures/LHCb.png}
-	\caption[Schematische Darstellung des LHCb Upgrade 2 Detektors.]{Schematische Darstellung eines Querschnittes des LHCb Upgrade 2 Detektors \cite{TDR}.}
+	\includegraphics[width=\textwidth]{content/Figures/LHCb.jpg}
+	\caption[Schematische Darstellung des LHCb Upgrade 2 Detektors.]{Schematische Darstellung eines Querschnittes des LHCb Upgrade 1 Detektors \cite{TDR}.}
 	\label{fig:LHCb}
 \end{figure}
 Der LHCb-Detektor ist als einarmiger Vorwärtsspektrometer konstruiert, 
@@ -26,7 +26,7 @@ da die $b$- $\bar{b}$-Paare bei den $pp$-Kollisionen überwiegend unter einem kl
 Daher sind die daraus entstehenden Hadronen in dieselbe Richtung geboostet \cite{bbangles}.
 
 In Abbildung \ref{fig:LHCb} wird der Querschnitt des LHCb Detektors dargestellt.
-Der \textit{Vertex-Locator} (VELO) dient der Identifizierung und Unterscheidung der primären und sekundären Vertices der Zerfälle.
+Der \textit{Vertex-Locator} (VELO) dient der Identifizierung und Unterscheidung der primären und sekundären Vertices der Teilchen.
 Da diese nur wenige Millimeter auseinander liegen,
 befindet sich der VELO direkt am Interaktionspunkt.
 Zusammen mit dem \textit{Upstream Tracker} (UT), 
@@ -34,7 +34,7 @@ dem \textit{Dipolmagneten} und dem \textit{SciFi Detektor} bildet der VELO das S
 Dieses dient der Rekonstruktion von Teilchenspuren und der Bestimmung des Impulses.
 Der durch die Ablenkung der Teilchen in einem Magnetfeld bestimmt werden kann.
 
-Die Detektoren \textit{RICH1}, \textit{RICH2}, \textit{ECAL}, \textit{Hcal} und die Myon Stationen \textit{M2} bis \textit{M5} dienen der Teilchenidentifikation.
+Die Detektoren \textit{RICH1}, \textit{RICH2}, \textit{ECAL}, \textit{HCAL} und die Myon Stationen \textit{M2} bis \textit{M5} dienen der Teilchenidentifikation.
 Der Schwerpunkt liegt hier in der Unterscheidung von Elektronen, Photonen, Kaonen und Protonen,
 da sie häufige Zerfallsprodukte von $b$-Hadronen sind \cite{TDR}.
 
@@ -44,7 +44,7 @@ da sie häufige Zerfallsprodukte von $b$-Hadronen sind \cite{TDR}.
 \label{sec:SciFi}
 Der SciFi Detektor befindte sich direkt hinter dem Dipolmagnet des LHCb Detektors und ist damit unerlässlich für die rekonstruktion von Teilchenspuren, 
 die durch den Magneten abgelenkt werden.
-Er bedeckt eine sensible Fläche von $340$ m$^2$ und besteht aus mehr als $10000$ km szintilierenden Fasern.
+Er bedeckt eine Fläche von $340$ m$^2$ und besteht aus mehr als $10000$ km szintilierenden Fasern.
 Die verwendeten Fasern haben einen Durchmesser von \SI{250}{\micro\meter} und werden in sechs gegeneinander versetzten Schichten zu einer kompakten Struktur aufgewickelt. 
 Auf diese Weise entstehen Fasermatten mit einer Länge von 2,4m und einer Breite von 13cm. 
 Eine Stirnseite der Matten ist mit einem Spiegel ausgestattet, 
@@ -52,7 +52,7 @@ der das entstehende Szintillationslicht zurück in Richtung des gegenüberliegen
 an dem sich die Ausleseelektronik befindet. 
 Jeweils acht dieser Matten werden zu größeren Einheiten zusammengefasst, die eine Gesamtbreite von 0,5m aufweisen.
 Aus diesen Einheiten bestehen dann die drei Detektorebenen des SciFi Detektors, 
-die jeweils 12m lang sind und eine Breite von 4,8m aufweisen.
+die jeweils 6m lang sind und eine Breite von 4,8m aufweisen.
 
 Jede der Detektorebenen besteht aus vier Schichten, 
 die in einer x-u-v-x Anordnung angeordnet sind.
@@ -78,7 +78,7 @@ entstehen in den Fasern Photonen, die von den SiPMs detektiert werden \cite{Anle
 
 \subsection{Szintilierende Fasern}
 \label{sec:szintilierende_Fasern}
-Damit die durch den in Abschnitt~\ref{sec:mechanismus} beschriebenen Mechanismus entstehenden Photonen die SiPMs erreichen sind die FAsern so konstruiert, 
+Damit die durch den in Abschnitt~\ref{sec:mechanismus} beschriebenen Mechanismus entstehenden Photonen die SiPMs erreichen sind die Fasern so konstruiert, 
 dass sie die Photonen durch Totalreflexion transportieren können.
 Darum besteht eine szintilierende Faser aus einem Kern aus Polystyrene und zwei Schichten mit abfallendem Brechungsindex.
 Insgesammt hat die Faser dadurch einen Durchmesser von \SI{250}{\micro\meter} \cite{Anleitung}.
@@ -135,7 +135,7 @@ kann die Anzahl der Totalreflexionen $N$ eines Photons berechnet werden durch:
     N = \frac{x\tan(\theta)}{2\sqrt{r_\text{core}^2-r_\text{min}^2}}  
 \end{equation}
 Wobei $x$ die Länge der Faser, $r_\text{core}$ der Radius des Kerns der Faser, $r_\text{min}$ der minimale Abstand des Photons von der Längsachse der Faser und $\theta$ der Winkel zwischen der Längsachse und der Richtung des Photons ist.
-Eine Schematische Darstellung der Parameter ist in Abbildung~\ref{fig:knickknack} dargestellt.
+Eine schematische Darstellung der Parameter ist in Abbildung~\ref{fig:knickknack} dargestellt.
 Die zurückgelegte Strecke $L$ durch die Faser ergibt sich durch:
 \begin{equation}
     L = \frac{x}{\cos(\theta)}.
@@ -164,7 +164,7 @@ Dies geschieht durch auftretende von Rayleigh-Streuung,
 welche den Winkel der Photonen so ändert,
 dass es nicht mehr zu Totalreflektion kommt.
 Zusätzlich kommt es durch verschiedene Effekte zur Absorption der Photonen durch die Faser.
-So werden durch die Photonen Phononen angeregt und auch die self-Absorbtion durch die Wavelength Shifter führt zu einer Abnahme der Intensität.
+So werden durch die Photonen Phononen angeregt und auch die Eigenabsorption durch die Wellenlängenverschieber führt zu einer Abnahme der Intensität.
 
 Zum anderen kommt es zu verlusten von Photonen durch Reflektionen an der Grenzfläche zwischen den Materialien.
 Die totalre Intensität $I_\text{total}$ kann durch die folgende Formel beschrieben werden:
@@ -172,7 +172,7 @@ Die totalre Intensität $I_\text{total}$ kann durch die folgende Formel beschrie
     I_\text{total}(x,\theta) = I_0 \cdot I_\text{core}(x,\theta) \cdot I_\text{refl}(x,\theta).
 \end{equation}
 
-In Abhängigkeit von der zurückgelegten Strecke $L$ durch die Faser und der Dämpfungslänge $\lambda$ kann die abnahme der Keren Intebnsität beschrieben werden durch:
+In Abhängigkeit von der zurückgelegten Strecke $L$ durch die Faser und der Dämpfungslänge $\lambda$ kann die abnahme der Intensität beschrieben werden durch:
 \begin{equation}
     I_\text{core}(x,\theta) = \exp{-\frac{L(x,\theta)}{\lambda}}.
 \end{equation}
@@ -195,7 +195,7 @@ Woraus sich die effektive Dämpfungslänge $a_\text{eff}$ ergibt durch:
 Silizium-Photomultiplier (SiPMs) werden im SciFi-Tracker eingesetzt, 
 um die von den Szintillationsfasern erzeugten Photonen nachzuweisen. 
 Dazu sind sie direkt an den Enden der Fasermatten angebracht. 
-in SiPM besteht aus einer Matrix vieler einzelner Avalanche-Photodioden-Pixel, 
+In SiPM besteht aus einer Matrix vieler einzelner Avalanche-Photodioden-Pixel, 
 die im sogenannten Geiger-Modus betrieben werden.
 
 Trifft ein Photon auf ein solches Pixel und wird absorbiert, 
@@ -204,10 +204,10 @@ Durch das angelegte elektrische Feld werden diese Ladungsträger getrennt und be
 Dabei gewinnen die Elektronen genügend Energie, 
 um weitere Elektron-Loch-Paare zu erzeugen. 
 Es kommt zu einer lawinenartigen Verstärkung (Avalanche), 
-bei der typischerweise etwa ($10^6)$ Elektronen entstehen. D
-iese Ladungslawine führt zu einem messbaren Strompuls.
+bei der typischerweise etwa ($10^6)$ Elektronen entstehen. 
+Diese Ladungslawine führt zu einem messbaren Strompuls.
 
-Damit das Pixel nach einem solchen Ereignis wieder empfindlich wird, 
+Damit das Pixel nach einem solchen Ereignis wieder reaktiv wird, 
 muss die Avalanche gestoppt werden. 
 Dies geschieht durch einen in Reihe geschalteten Widerstand, 
 der den Strom begrenzt und die Lawine „quencht“. 
@@ -216,11 +216,10 @@ ein neues Photon zu detektieren.
 
 Eine zentrale Kenngröße von SiPMs ist die Photodetektionseffizienz (Photon Detection Efficiency, PDE). 
 Sie beschreibt das Verhältnis zwischen detektierten und tatsächlich einfallenden Photonen und hängt stark von der Wellenlänge des Lichts ab. 
-Im Maximum liegt die PDE bei etwa $43\%$.
+Im Maximum liegt die PDE bei den hier verwendeten SiPMs bei etwa $43\%$.
 
 Eine weitere wichtige Eigenschaft ist die Dunkelrate (dark count rate), 
-also das Signalrauschen, 
-das ohne einfallendes Licht entsteht. 
+welche ohne einfallendes Licht entsteht. 
 Dieses Rauschen ist temperaturabhängig und wird hauptsächlich durch thermisch erzeugte Ladungsträger verursacht. 
 Um diesen Effekt zu minimieren, 
 werden die SiPMs im SciFi-Tracker bei einer Temperatur von etwa \SI{-40}{\celsius} betrieben.
