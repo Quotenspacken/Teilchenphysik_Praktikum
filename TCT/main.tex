@@ -1,0 +1,32 @@
+\documentclass[
+  bibliography=totoc,     % Literatur im Inhaltsverzeichnis
+  captions=tableheading,  % Tabellenüberschriften
+  titlepage=firstiscover, % Titelseite ist Deckblatt
+]{scrartcl}
+
+\input{header.tex}
+
+\title{Messung des Drifts von Ladungsträgern in einem Halbleiter mit der Transient-Current-Technik}
+\date{%
+  Durchführung: 21. Mai 2026
+  \hspace{3em}
+  Abgabe: \today
+}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+
+\input{content/2_theory.tex}
+\input{content/3_exp_setup_conduction.tex}
+\input{content/auswertung.tex}
+\input{content/diskussion.tex}
+
+\printbibliography{}
+
+\end{document}
+ 
