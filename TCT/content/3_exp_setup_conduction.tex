@@ -2,6 +2,7 @@
 \label{sec:experimental_setup_and_conduction}
 \subsection{Versuchsaufbau}
 \label{sec:versuchsaufbau}
+In diesem Experiment wird der TCT-Aufbau zusammengestellt aus der Silizium-Detektor, dem Laser, dem DRS Board für das Messen der zeitabhängigen Signalform, der Spannungsversorgung für den Verstärker und dem Laser, wobei die Spannung für den Verstärker regulierbar ist, einem Hochspannungsnetzteil mit einem Hochspannungsfilter, um Rauschen heraus zu filtern und ein Computer zur Auswertung und Visualisierung der Messpunkte von dem DRS Board sowie der Steuerung über die Pulsbreite des Lasers. Dieser Aufbau ist ebenfalls auch in \autoref{fig:setup} und schematisch in \autoref{fig:schem_setup} dargestellt.\\\\
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{content/Figures/setup.png}
@@ -14,5 +15,6 @@
 \caption{Schematischer Aufbau des Experiments \cite{Anleitung}.}
 \label{fig:schem_setup}
 \end{figure}
+Dabei ist das DRS Board für sehr schnelle Digitalisierungsprozesse integriert, um die kurzen Spannungspulse, die vom Verstärker verstärkt werden, in ein zeitaufgelöstes Signal umzuwandeln. Das DRS Board speichert die verschiedenen Spannungen in unterschiedliche Zeitstempel. Dafür muss eine Spannungskalibrierung und eine zeitliche Kalibrierung durchgeführt werden, da die Messung von der Betriebstemperatur des DRS Boardes abhängt. Deshalb muss das DRS Board sich aufwärmen bis die Betriebstemperatur nicht weiter steigt.
 \subsection{Versuchsdurchführung}
 \label{sec:versuchsdurchführung}
