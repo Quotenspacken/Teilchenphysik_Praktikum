@@ -3,14 +3,91 @@
 In diesem Protkoll wird das Driftverhalten von Ladungsträgern in einem Silizium-Halbleiter mithilfe der Transient-Current-Technik analysiert. Dabei wird zunächst die Funktionsweise eines Silizium-Halbleiter-Detektors in dem \autoref{sec:semi} erläutert. Desweiteren wird in dem \autoref{sec:drift} das Driftverhalten von Ladungsträgern erklärt und daraufhin in dem \autoref{sec:tct} die Transient-Current-Technik beschrieben.
 \subsection{Silizium-Halbleiter}
 \label{sec:semi}
-
+Silizium ist ein Halbleiter und wird in diesem Versuch dazu verwendet, um mithilfe von einem Laser mit der Wellenlänge $\lambda \approx \SI{600}{\nano\meter}$ Elektron-Loch-Paare zu erzeugen. Dabei wird unterschieden zwischen dem Valenzband, in dem die Elektronen gebunden sind und dem Leitungsband, in dem die Elektronen mit genügender Energie sich frei durch das Gitter bewegen können und dementsprechend zum elektrischen Strom beitragen. Dazwischen ist die Bandlücke, die definiert um wieviel Energie die Elektronen angeregt werden müssen. Bei Silizium ist diese Bandlücke etwa $E_{\text{SI}} \approx \SI{1.12}{\eV}$. Der Laser kann also die Elektronen anregen bis zu $E_{\gamma} = \sfrac{hc}{\lambda} \approx \SI{2.07}{\eV}$. Damit ergibt sich Silizium als sinnvoll, da die Bedingung von der Erzeugung der Elektron-Loch-Paare mit $E_{\text{SI}} \le E_{\gamma}$ erfüllt ist. Wenn ein Elektron nun in das Leitungsband angeregt wird, wird ein ''Loch'' im Valenzband zurück gelassen. Dieses Loch verhält sich wie ein positiv geladenes Teilchen.\\
+Da aber reines Silizium nur wenige freie Ladungsträger hat, wird das Silizium p- und n- dotiert. Dafür werden einzelne Atome hinzugefügt die entweder ein Elektron mehr in der äußeren Schale haben oder ein Elektron weniger beziehungsweise ein Loch mehr. Dabei wird die Eigenschaft der Bandlücke von Silizium weiterhin erhalten und es werden weitere Ladungsträger ergänzt. Ebenso diffundieren die Elektronen von der n-Seite zu der p-Seite und bei den Löchern von der p-Seite zu der n-Seite. Es ensteht in der Grenzregion eine Verarmungszone, die kaum freie Ladungsträger beinhaltet. Diese Verarmungszone ist das effektive Detektor-Volumen und wird mithilfe einer Depletionsspannung in Sperrrichtung vergrößert. Damit wird sämtliches Rauschen aufgrund von thermischen Fluktuationen minimiert und ein klareres Signal erstellt. Die Depletionsspannung ist die Spannung bei der der Sensor vollständig depletiert ist und hängt von der Dotierkonzentration $N_D$ und der Dicke des Sensors $d$ ab
+\begin{equation}
+    V_{\text{dep}} \approx \frac{e N_D d^2}{2 \varepsilon \varepsilon_0} \propto N_D d^2.
+    \label{eqn:V_dep}
+\end{equation}
+Das elektrische Feld in einem überdepletierten Detektor, also für $V > V_{\text{dep}}$, ist aufgrund der Raumladungen ortsabhängig und kann beschrieben werden durch
+\begin{equation*}
+    \vec{E}\left(x\right) = - \left[\frac{V+V_{\text{dep}}}{d}-\frac{2 V_{\text{dep}}}{d^2}x\right] \vec{e}_x.
+    \label{eqn:E}
+\end{equation*}
+Dies kann zusammengefasst werden zu
+\begin{equation}
+    \vec{E}\left(x\right) = - \left(a-b x\right) \vec{e}_x \quad \text{mit} \quad a =\frac{V+V_{\text{dep}}}{d} \quad \text{und} \quad b= \frac{2 V_{\text{dep}}}{d^2}.
+    \label{eqn:E_neu}
+\end{equation}
+Das elektrische Feld hängt direkt durch $\vec{F} = q \vec{E}$ mit der Kraft die auf die Ladungsträger wirkt zusammen und bestimmt daher wie schnell sich die Ladungsträger bewegen.
 \subsection{Driftverhalten von Ladungsträgern}
 \label{sec:drift}
+Bei den Ladungsträger wird unterschieden zwischen den Elektronen mit $q = -e$ und den Löchern mit $q = +e$. Dementsprechend bewegen sich die Elektronen und die Löcher in entgegengesetze Richtungen. Die Ladungsträger bewegen aufgrund des elektrischen Feldes durch das Gitter und wechselwirken ständig mit den Phononen, also den Schwingungen des Kristallgitters, mit Störstellen oder Kristalldefekten. Dadurch verlieren die Ladungsträger immer wieder Energie und es mittelt sich eine Geschwindigkeit, die Driftgeschwindigkeit $\vec{v}_D$ genannt wird. Diese lässt sich annäherungsweise bestimmen durch $\vec{v}_D = \mu \vec{E}$, wobei $\mu$ die Mobilität beschreibt.\\
+Elektronen sind beweglicher als Löcher, daher wird in diesem Protkoll unterschieden zwischen
+\begin{equation}
+    \vec{v}_e = - \mu_e \vec{E} \quad \text{und} \quad \vec{v}_h = + \mu_h \vec{E}.
+    \label{eqn:v_D}
+\end{equation}
+Daraus folgt, dass eine größere Mobilität der Elektronen $\mu_e$ bezüglich der Mobilität der Löcher $\mu_h$ erwartet wird und damit $\mu_e > \mu_h$ gilt. Mithilfe von \autoref{eqn:E_neu} lässt sich die Driftgeschwindigkeit definieren als
+\begin{equation}
+    \vec{v}_e = \mu_e \left(a - b x\right) \quad \text{und} \quad \vec{v}_h = - \mu_h \left(a - b x\right).
+    \label{eqn:v_neu}
+\end{equation}
+Ebenso werden die charakteristischen Driftzeiten $\tau_{e/h}$ definiert als
+\begin{equation}
+    \tau_{e/h} = \frac{1}{\mu_{e/h}b}=\frac{d^2}{2 \mu_{e/h} V_{\text{dep}}}.
+    \label{eqn:t_D}
+\end{equation}
+Mit $\mu_e > \mu_h$ folgt daraus auch $\tau_e < \tau_h$.\\
+Aus den Bewegungsgleichungen
+\begin{align*}
+    \frac{\text{d}x_e}{\text{d}t} &= \mu_e \left(a-b x_e\right)\\
+    \frac{\text{d}x_h}{\text{d}t} &= - \mu_h \left(a-b x_h\right)
+\end{align*}
+folgt ein exponentieller Ansatz für $x_{e/h}\left(t\right)$
+\begin{align*}
+    x_e\left(t\right) &= \frac{a}{b}-\left(\frac{a}{b}-x_0\right)e^{-t/\tau_e} \\
+    x_h\left(t\right) &= \frac{a}{b}-\left(\frac{a}{b}-x_0\right)e^{+t/\tau_h}
+\end{align*}
+und daraus die Geschwindigkeiten
+\begin{align}
+    v_e\left(t\right) &= \frac{1}{\tau_e} \left(\frac{a}{b}-x_0\right)e^{-t/\tau_e}    \label{eqn:v_ansatz1} \\
+    v_h\left(t\right) &= -\frac{1}{\tau_h}\left(\frac{a}{b}-x_0\right)e^{+t/\tau_h}.
+    \label{eqn:v_ansatz2}
+\end{align}
+Durch das ortsabhängige elektrische Feld ensteht eine ungleichmäßige Bewegung der Ladungsträger, was ebenfalls aus der \autoref{eqn:v_ansatz1} und \autoref{eqn:v_ansatz2} hervor geht.\\\\
+Ebenso lassen sich die Sammelzeiten $T^{-/+}$ herleiten. Dafür wird angenommen, dass die Elektronen die Elektrode bei $x_e = d$ erreichen und die Löcher bei $x= 0$. Daraus ergeben sich die Sammelzeiten
+\begin{align}
+    T^{-} &= \tau_e\ln{\left(\frac{a-bx_0}{a-bd}\right)}    \label{eqn:T1} \\
+    T^{+} &= \tau_h \ln{\left(\frac{a}{a-bx_0}\right)}.
+    \label{eqn:T2}
+\end{align}
+Ebenso lässt sich mithilfe von \autoref{eqn:T1} zeigen, dass der Sensor vollständig depletiert sein muss
+\begin{align*}
+    0 &< a-bd = \frac{V+V_{\text{dep}}-2V_{\text{dep}}}{d}\\
+    \Leftrightarrow V_{\text{dep}} &< V.
+\end{align*}
+Zusätzlich ist neben dem Drift auch die Diffusion ein Bewegungsfaktor. Dabei bewegen sich die Ladungsträger von der hohen Konzentration zu einer niedrigeren Konzentration. Dabei wird die Signalform breiter. Mithilfe der Gradienten der Ladungsträgerdichte $\nabla n$ und $\nabla p$ und den Diffusionskoeffizienten $D_n$ und $D_p$ lässt sich also der gesamt Strom für Elektronen und Löcher schreiben als
+\begin{equation*}
+    \vec{j}_{e/h} = q \mu_{e/h} n \vec{E}- e D_{n/p} \nabla n/\nabla p.
+\end{equation*}
+Ein weiterer Effekt ist, dass die Driftgeschwindigkeit ab einer Grenze gesättigt ist und somit mit höherer Spannung nicht mehr zunimmt. Das liegt daran, dass die Ladungsträger dann stärker mit dem Gitter wechselwirken und nicht mehr beschleunigen.\\\\
+Es wird während der Bewegung der Ladungsträger bereits ein Strom an den Elektroden induziert. Dieser wird durch das Shockley-Ramo-Theorem beschrieben mit
+\begin{equation*}
+    i(t) = q\,\vec{v}(t)\cdot \vec{E}_w
+\end{equation*}
+mit dem Gewichtungsfeld an der Elektrode $\vec{E}_w$. 
 \subsection{Transient-Current-Technik}
 \label{sec:tct}
+Die Transient-Current-Technik nutzt die zuvor beschriebene Driftbewegung der Ladungsträger, um deren Transportverhalten zu untersuchen. Der schematische Aufbau ist dabei gegeben in der \autoref{fig:tct_setup}.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{content/Figures/tct_setup.jpg}
 \caption{Der schematische Versuchsaufbau der Transient-Current-Technik (TCT) \cite{Anleitung}.}
 \label{fig:tct_setup}
 \end{figure}
+In der \autoref{fig:tct_setup} ist eine Probe eingezeichnet die von einem Laser bestrahlt wird und an einer Hochspannung (HV) angelegt ist. Zudem befindet sich noch ein Verstärker der, den kurzen Stromimpuls verstärkt, sodass er für das Oszilloskop auslesbar ist. Das Oszilloskop misst dabei die zeitabhängige Wellenform $U\left(t\right)$, der mit dem effektiven Widerstand $R$ zum induzierten Strom $i\left(t\right) = U\left(t\right) / R$ umgeformt werden kann. Daraus lässt sich die induzierte Ladung
+\begin{equation*}
+    Q = \int i(t)\,\mathrm{d}t
+\end{equation*}
+bestimmen.
