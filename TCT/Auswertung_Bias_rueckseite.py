@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
 from scipy.ndimage import gaussian_filter
+from scipy.optimize import curve_fit
 
 
 
@@ -140,6 +141,37 @@ ax.grid(True)
 plt.tight_layout()
 plt.savefig("Auswertung/bias_rueckseite.png", dpi=150)
 
+###################################
+### Mittlere Waveforms C001     ###
+###################################
+df_raw = df[(df["channel"] == "C001") & (df["event"] <= 1000)].copy()
+
+fig, ax = plt.subplots(figsize=(10, 4))
+for volt in selection:
+    grp = df_raw[df_raw["bias_V"] == volt]
+    t_common = np.linspace(grp["time_ns"].min(), grp["time_ns"].max(), 1024)
+    mean_v = np.zeros_like(t_common)
+    n_ev = 0
+    for ev, ev_df in grp.groupby("event"):
+        if len(ev_df) < 5:
+            continue
+        mean_v += np.interp(t_common, ev_df["time_ns"].values, ev_df["voltage_V"].values)
+        n_ev += 1
+    if n_ev > 0:
+        mean_v /= n_ev
+        mean_v = gaussian_filter(mean_v, sigma=3)
+        ax.plot(t_common, mean_v, linewidth=1.2, label=f"{volt} V")
+
+ax.set_xlim(40, 60)
+ax.set_xlabel("Zeit (ns)")
+ax.set_ylabel("Spannung (V)")
+ax.set_title("Signal Rückseite")
+ax.legend(title="Bias-Spannung")
+ax.grid(True)
+plt.tight_layout()
+plt.savefig("Auswertung/mean_waveforms_rueckseite.png", dpi=150)
+print("Mittlere Waveforms Rückseite gespeichert")
+
 #########################
 ### Charge berechnen ###
 #########################
@@ -237,3 +269,61 @@ ax.grid(True)
 plt.tight_layout()
 plt.savefig("Auswertung/signalzeit_vs_bias_rueckseite.png", dpi=150)
 print("Signalzeitplot gespeichert")
+
+################################
+### Mobilitäts-Fit (Gl. 5.77) ##
+### Ladungsträger: Löcher      ##
+### (Rückseite, x_0 ≈ d)      ##
+################################
+d_m   = 300e-6   # Detektordicke in m
+V_dep = 14.83    # Depletionsspannung in V (Betrag)
+
+# Nur Punkte mit |V| > V_dep verwenden (Formel nur dann definiert)
+fit_df = signal_time_mean[signal_time_mean["bias_V"] > V_dep].copy()
+V_abs  = fit_df["bias_V"].values.astype(float)
+T_ns   = fit_df["mean"].values
+T_s    = T_ns * 1e-9
+T_err  = fit_df["std"].values * 1e-9
+
+def collection_time_holes(V_abs, mu_h):
+    """
+    Sammelzeit für Löcher nach Gl. (5.77), x_0 = d:
+    T⁺ = tau_h * ln((|V| + V_dep) / (|V| - V_dep))
+    mit tau_h = d² / (2 * mu_h * V_dep)
+    """
+    tau = d_m**2 / (2.0 * mu_h * V_dep)
+    return tau * np.log((V_abs + V_dep) / (V_abs - V_dep))
+
+# Startwert: mu_h ≈ 0.045 m²/(V·s) = 450 cm²/(V·s)
+p0 = [0.045]
+popt, pcov = curve_fit(
+    collection_time_holes, V_abs, T_s,
+    p0=p0, sigma=T_err, absolute_sigma=True, maxfev=10000
+)
+mu_h_fit = popt[0]
+mu_h_err = np.sqrt(pcov[0, 0])
+
+print(f"\n=== Mobilitäts-Fit Löcher (Rückseite) ===")
+print(f"μ_h = ({mu_h_fit * 1e4:.1f} ± {mu_h_err * 1e4:.1f}) cm²/(V·s)")
+
+# Plot
+V_plot = np.linspace(V_abs.min(), V_abs.max(), 500)
+T_plot = collection_time_holes(V_plot, mu_h_fit) * 1e9  # in ns
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.errorbar(
+    V_abs, T_ns, yerr=fit_df["std"].values,
+    fmt="o", capsize=4, color="steelblue", label="Messung", zorder=3
+)
+ax.plot(
+    V_plot, T_plot, "-", color="tomato", linewidth=2,
+    label=rf"Fit Gl.(5.77): $\mu_h$ = ({mu_h_fit * 1e4:.0f} $\pm$ {mu_h_err * 1e4:.0f}) cm²/(V·s)"
+)
+ax.set_xlabel("|Bias-Spannung| (V)")
+ax.set_ylabel("Signaldauer (ns)")
+ax.set_title("Mobilitäts-Fit — Löcher (Rückseite)")
+ax.legend()
+ax.grid(True)
+plt.tight_layout()
+plt.savefig("Auswertung/mobilitaet_loecher_rueckseite.png", dpi=150)
+print("Mobilitätsplot gespeichert")
