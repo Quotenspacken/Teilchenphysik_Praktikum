@@ -1,11 +1,11 @@
 all: build/main.pdf
 
 # hier Python-Skripte:
-build/TCT.pdf: TCT.py matplotlibrc header-matplotlib.tex | build
-	TEXINPUTS=$$(pwd): python TCT.py
+#build/TCT.pdf: TCT.py matplotlibrc header-matplotlib.tex | build
+#	TEXINPUTS=$$(pwd): python TCT.py
 
 # hier weitere Abhängigkeiten für build/main.pdf deklarieren:
-build/main.pdf: build/TCT.pdf
+#build/main.pdf: build/TCT.pdf
 
 build/main.pdf: FORCE | build
 	  TEXINPUTS=build: \

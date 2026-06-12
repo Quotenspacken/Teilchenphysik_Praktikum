@@ -1,5 +1,6 @@
 \section{Versuchsaufbau und Durchführung}
 \label{sec:experimental_setup_and_conduction}
+Dieses Kapitel thematisiert den Versuchsaufbau in \autoref{sec:versuchsaufbau} und die Versuchsdurchführung in \autoref{sec:versuchsdurchfuehrung}. 
 \subsection{Versuchsaufbau}
 \label{sec:versuchsaufbau}
 In diesem Experiment wird der TCT-Aufbau zusammengestellt aus der Silizium-Detektor, dem Laser, dem DRS Board für das Messen der zeitabhängigen Signalform, der Spannungsversorgung für den Verstärker und dem Laser, wobei die Spannung für den Verstärker regulierbar ist, einem Hochspannungsnetzteil mit einem Hochspannungsfilter, um Rauschen heraus zu filtern und ein Computer zur Auswertung und Visualisierung der Messpunkte von dem DRS Board sowie der Steuerung über die Pulsbreite des Lasers. Dieser Aufbau ist ebenfalls auch in \autoref{fig:setup} und schematisch in \autoref{fig:schem_setup} dargestellt.\\\\
@@ -16,3 +17,7 @@ In diesem Experiment wird der TCT-Aufbau zusammengestellt aus der Silizium-Detek
 \label{fig:schem_setup}
 \end{figure}
 Dabei ist das DRS Board für sehr schnelle Digitalisierungsprozesse integriert, um die kurzen Spannungspulse, die vom Verstärker verstärkt werden, in ein zeitaufgelöstes Signal umzuwandeln. Das DRS Board speichert die verschiedenen Spannungen in unterschiedliche Zeitstempel. Dafür muss eine Spannungskalibrierung und eine zeitliche Kalibrierung durchgeführt werden, da die Messung von der Betriebstemperatur des DRS Boardes abhängt. Deshalb muss das DRS Board sich aufwärmen bis die Betriebstemperatur nicht weiter steigt.
+\subsection{Versuchsdurchführung}
+\label{sec:versuchsdurchfuehrung}
+Zunächst wird der Versuchsaufbau von der \autoref{fig:schem_setup} nachgestellt und das DRS Board wird auf die Betriebstemperatur gebracht. Danach wird das DRS Board einmal für die zeitliche Messung und einmal für die Spannungsmessung kalibriert. Danach wird der Verstärker so eingestellt, dass das Signal maximal sichtbar ist. Dies erhöht ebenso das Rauschen, ist jedoch hilfreich um die Pulsbreite besser abschätzen zu können.\\\\
+Als Nächstes werden verschiedene Spannungen von $\SI{-60}{\volt}$ bis $\SI{-500}{\volt}$ eingestellt und die verschiedenen Waveforms gespeichert. Zudem wird für einen festen Bias von $\SI{-150}{\volt}$ verschiedene Laserintensitäten eingestellt und die Waveforms erneut gespeichert. Ebenso werden die induzierte Ladung für die verschiedenen Laserintensitäten ermittelt mithilfe einer Integration über dem Pulssignal. Dies wird wiederholt für einen umgedrehten Sensor. 
