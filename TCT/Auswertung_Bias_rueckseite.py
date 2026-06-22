@@ -130,7 +130,7 @@ for volt in selection:
     (df["channel"] == "C001")
     ]
     sns.lineplot(data=df_sel, x="time_ns", y="voltage_V", ax=ax, linewidth=1.2, label=f"{volt} V")
-    ax.set_xlim(40, 60)
+    ax.set_xlim(45, 75)
     ax.set_title("Bias Vergleich — Rückseite")
     ax.set_xlabel("Zeit (ns)")
     ax.set_ylabel("Spannung (V)")
@@ -162,7 +162,7 @@ for volt in selection:
         mean_v = gaussian_filter(mean_v, sigma=3)
         ax.plot(t_common, mean_v, linewidth=1.2, label=f"{volt} V")
 
-ax.set_xlim(40, 60)
+ax.set_xlim(45, 75)
 ax.set_xlabel("Zeit (ns)")
 ax.set_ylabel("Spannung (V)")
 ax.set_title("Signal Rückseite")
@@ -206,6 +206,7 @@ ax.errorbar(
     charge_mean["bias_V"], charge_mean["mean"], yerr=charge_mean["std"],
     marker="o", linewidth=1.5, capsize=4, color="steelblue"
 )
+ax.set_xlim(90, 510)   
 ax.set_xlabel("Bias-Spannung (V)")
 ax.set_ylabel("Ladung (pC)")
 ax.set_title("Gemittelte Ladung vs. Bias-Spannung — Rückseite")

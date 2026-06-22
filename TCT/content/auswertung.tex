@@ -70,7 +70,8 @@ Somit lässt sich die erzeugte Ladung bestimmen, indem über das gemessene Signa
 sowohl für die Vorder- als auch für die Rückseite.
 Für die Berechnung wurde der Peak des Signals mittels der Python-Bibliothek \texttt{scipy.signal.find\_peaks} bestimmt.
 Für die Integrationsgrenzen wurden durch eine Abweichung von $5\,\%$ des Rauschpegels über und unter dem Peak gewählt.
-DAs Rauschen wurde durch die ersten 1000 Messpunkte eines Events bestimmt, bevor der Laser gepulst wurde.
+Das Rauschen wurde durch die ersten 1000 Messpunkte eines Events bestimmt, bevor der Laser gepulst wurde.
+Aufgrund des hohen Rauschens bei Bias-Spannungen von unter $100$ Volt  konnten diese Werte nicht zuverlässig bestimmt werden und wurden daher nicht in die Auswertung einbezogen.
 \begin{figure}[htbp]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
@@ -108,7 +109,7 @@ Durch Integration über die Siganle wurde auch hier wie oben beschrieben die Lad
   \caption{Gemittelte induzierte Ladung als Funktion der Laserintensitätsreduktion. Eine Reduktion von $x\,\%$ entspricht einer Pulsbreite von $(100-x)\,\%$. Fehlerbalken geben die Standardabweichung über 1000 Events an.}
   \label{fig:charge_laser}
 \end{figure}
-Die Ladung singt mit abnehmender Laserintensität, da weniger Elektron-Loch-Paare erzeugt werden.
+Die Ladung sinkt mit abnehmender Laserintensität, da weniger Elektron-Loch-Paare erzeugt werden.
 
 
 
@@ -129,7 +130,7 @@ Die Signaldauer ist definiert als die zeitliche Breite des Pulses vom Anstieg bi
     \caption{Rückseite (Löcher)}
     \label{fig:sigtime_r}
   \end{subfigure}
-  \caption{Gemittelte Signaldauer als Funktion der Bias-Spannung. Mit steigender Spannung sinkt die Signaldauer, da das elektrische Feld stärker wird und die Ladungsträger schneller driften.}
+  \caption{Gemittelte Signaldauer als Funktion der Bias-Spannung. Mit steigender Spannung sinkt die Signaldauer, da das elektrische Feld stärker wird und die Ladungsträger schneller driften. Aufgrund des hohen Rauschens bei Bias-Spannungen von unter $100$ Volt konnten diese Werte nicht zuverlässig bestimmt werden.}
   \label{fig:sigtime_bias}
 \end{figure}
 Mit steigendem Bias sinkt die Signaldauer, da das elektrische Feld stärker wird und die Ladungsträger schneller zur Elektrode getrieben werden.
