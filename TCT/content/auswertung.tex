@@ -71,7 +71,11 @@ sowohl für die Vorder- als auch für die Rückseite.
 Für die Berechnung wurde der Peak des Signals mittels der Python-Bibliothek \texttt{scipy.signal.find\_peaks} bestimmt.
 Für die Integrationsgrenzen wurden durch eine Abweichung von $5\,\%$ des Rauschpegels über und unter dem Peak gewählt.
 Das Rauschen wurde durch die ersten 1000 Messpunkte eines Events bestimmt, bevor der Laser gepulst wurde.
-Aufgrund des hohen Rauschens bei Bias-Spannungen von unter $100$ Volt  konnten diese Werte nicht zuverlässig bestimmt werden und wurden daher nicht in die Auswertung einbezogen.
+Aufgrund des hohen Rauschens bei Bias-Spannungen von unter $100$ Volt  kommt es in diesem Bereich zu einem verfälschten Ergebnis, 
+da die Integrationsgrenzen dadzurch nicht zuverlässig bestimmt werden können.
+Zusätlich könnte es in diesem Spannungsbereich noch nicht zu einer vollständigen Depletion des Sensors gekommen sein,
+was einen möglichen Grund für die Steigende Ladung bei Bias-Spannungen von unter $100$ Volt darstellen könnte. 
+Der Grund ist das bei einem nicht vollständig depletierten Sensor die Ladungsträger nicht vollständig zur Elektrode getrieben werden und somit Ladungen verloren gehen.
 \begin{figure}[htbp]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
@@ -85,13 +89,14 @@ Aufgrund des hohen Rauschens bei Bias-Spannungen von unter $100$ Volt  konnten d
     \caption{Rückseite (Löcher)}
     \label{fig:charge_bias_r}
   \end{subfigure}
-  \caption{Gemittelte induzierte Ladung als Funktion der Bias-Spannung. Fehlerbalken geben die Standardabweichung über 1000 Events an.}
+  \caption{Gemittelte induzierte Ladung als Funktion der Bias-Spannung. Fehlerbalken geben die Standardabweichung über 1000 Events an.
+            Der Anstig im Bereich unter $100$ Volt ist auf das hohe Rauschen und eine mögliche unvollständige Depletion des Sensors zurückzuführen.}
   \label{fig:charge_bias}
 \end{figure}
 Zu beobachten ist das die gemessene Ladung unabhängig von der Bias-Spannung ist, 
 da die Anzahl der erzeugten Elektron-Loch-Paare durch die Laserintensität bestimmt wird und nicht durch das elektrische Feld. 
 
-In \autoref{fig:charge_laser} ist der berechnete Strom in Abhängigkeit der Laserintensität aufgetragen.
+In \autoref{fig:charge_laser} ist der berechnete Ladung in Abhängigkeit der Laserintensität aufgetragen.
 Durch Integration über die Siganle wurde auch hier wie oben beschrieben die Ladung bestimmt.
 \begin{figure}[htbp]
   \centering
@@ -149,12 +154,14 @@ In \autoref{fig:sigtime_laser} ist die gemittelte Signaldauer als Funktion der L
     \includegraphics[width=\textwidth]{Auswertung/signalzeit_vs_laser_rueckseite.png}
     \caption{Rückseite}
   \end{subfigure}
-  \caption{Gemittelte Signaldauer als Funktion der Laserintensitätsreduktion. Die Signaldauer zeigt keine signifikante Abhängigkeit von der Laserintensität.}
+  \caption{Gemittelte Signaldauer als Funktion der Laserintensitätsreduktion. Die Signaldauer zeigt keine signifikante Abhängigkeit von der Laserintensität. Die Abnehmenden Signaldauer bei der Rückseite ist auf das hohe Rauschen bei niedrigen Laserintensitäten zurückzuführen.}
   \label{fig:sigtime_laser}
 \end{figure}
 Die Signaldauer zeigt keine signifikante Abhängigkeit von der Laserintensität, 
 da diese nur die Anzahl der erzeugten Ladungsträger beeinflusst, 
 nicht aber die Driftgeschwindigkeit oder das elektrische Feld, welche die Signaldauer bestimmen.
+Allerdings ist bei der Rückseite vergl\autoref{fig:sigtime_laser} eine  Abnahme der Signaldauer mit abnehmender Laserintensität zu beobachten.
+Dies ist auf das hohe Rauschen der Rückseite bei niedrigen Laserintensitäten zurückzuführen.
 
 
 

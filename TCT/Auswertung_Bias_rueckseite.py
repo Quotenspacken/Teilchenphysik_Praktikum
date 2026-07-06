@@ -206,7 +206,7 @@ ax.errorbar(
     charge_mean["bias_V"], charge_mean["mean"], yerr=charge_mean["std"],
     marker="o", linewidth=1.5, capsize=4, color="steelblue"
 )
-ax.set_xlim(90, 510)   
+ax.set_xlim(0, 510)   
 ax.set_xlabel("Bias-Spannung (V)")
 ax.set_ylabel("Ladung (pC)")
 ax.set_title("Gemittelte Ladung vs. Bias-Spannung — Rückseite")
@@ -279,8 +279,8 @@ print("Signalzeitplot gespeichert")
 d_m   = 300e-6   # Detektordicke in m
 V_dep = 14.83    # Depletionsspannung in V (Betrag)
 
-# Nur Punkte mit |V| > V_dep verwenden (Formel nur dann definiert)
-fit_df = signal_time_mean[signal_time_mean["bias_V"] > V_dep].copy()
+# Nur Punkte mit |V| >= 100 V verwenden (niedrige Biase ausschließen)
+fit_df = signal_time_mean[signal_time_mean["bias_V"] >= 100].copy()
 V_abs  = fit_df["bias_V"].values.astype(float)
 T_ns   = fit_df["mean"].values
 T_s    = T_ns * 1e-9
@@ -295,8 +295,15 @@ def collection_time_holes(V_abs, mu_h):
     tau = d_m**2 / (2.0 * mu_h * V_dep)
     return tau * np.log((V_abs + V_dep) / (V_abs - V_dep))
 
-# Startwert: mu_h ≈ 0.045 m²/(V·s) = 450 cm²/(V·s)
-p0 = [0.045]
+# Startwert analytisch aus gewichteter Linearregression T = A * log_term
+# (liefert den nächstliegenden Startwert für curve_fit)
+log_term = np.log((V_abs + V_dep) / (V_abs - V_dep))
+w = 1.0 / T_err**2
+A_init = np.sum(w * log_term * T_s) / np.sum(w * log_term**2)
+mu_h_init = d_m**2 / (2.0 * A_init * V_dep)
+p0 = [mu_h_init]
+print(f"Analytischer Startwert μ_h = {mu_h_init * 1e4:.1f} cm²/(V·s)")
+
 popt, pcov = curve_fit(
     collection_time_holes, V_abs, T_s,
     p0=p0, sigma=T_err, absolute_sigma=True, maxfev=10000
@@ -312,6 +319,17 @@ V_plot = np.linspace(V_abs.min(), V_abs.max(), 500)
 T_plot = collection_time_holes(V_plot, mu_h_fit) * 1e9  # in ns
 
 fig, ax = plt.subplots(figsize=(8, 5))
+
+# Ausgeschlossene Punkte (< 100 V) in grau darstellen
+excluded_df = signal_time_mean[
+    (signal_time_mean["bias_V"] > V_dep) & (signal_time_mean["bias_V"] < 100)
+].copy()
+if not excluded_df.empty:
+    ax.errorbar(
+        excluded_df["bias_V"], excluded_df["mean"], yerr=excluded_df["std"],
+        fmt="o", capsize=4, color="gray", alpha=0.5, label="Messung (nicht gefittet)", zorder=2
+    )
+
 ax.errorbar(
     V_abs, T_ns, yerr=fit_df["std"].values,
     fmt="o", capsize=4, color="steelblue", label="Messung", zorder=3
