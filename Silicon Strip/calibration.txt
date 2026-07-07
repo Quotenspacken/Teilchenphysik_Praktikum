@@ -1,0 +1,5 @@
+#Einstellungen: Sample size: 100; Number of events: 1000; Delay: 60
+#Channel strip      Delay ns
+28         64
+
+7.5
