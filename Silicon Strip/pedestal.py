@@ -30,9 +30,7 @@ ax.errorbar(
 
 ax.set_xlabel("Strip number")
 ax.set_ylabel("ADC counts")
-ax.set_title("Pedestal and noise for each strip")
-ax.grid(alpha=0.3)
 ax.legend()
 
 fig.tight_layout()
-fig.savefig("build/pedestal_noise.pdf")
+fig.savefig("build/pedestal.pdf")
