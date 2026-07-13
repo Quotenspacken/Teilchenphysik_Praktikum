@@ -13,6 +13,8 @@ build/calibration_0.pdf: calibration.py matplotlibrc header-matplotlib.tex | bui
 	TEXINPUTS=$$(pwd): python calibration.py
 build/laser.pdf: laser.py matplotlibrc header-matplotlib.tex | build
 	TEXINPUTS=$$(pwd): python laser.py
+build/CCE.pdf: CCE.py matplotlibrc header-matplotlib.tex | build
+	TEXINPUTS=$$(pwd): python CCE.py
 # hier weitere Abhängigkeiten für build/main.pdf deklarieren:
 build/main.pdf: build/IV.pdf
 build/main.pdf: build/pedestal.pdf
@@ -20,6 +22,7 @@ build/main.pdf: build/calibration.pdf
 build/main.pdf: build/calibration_fix.pdf
 build/main.pdf: build/calibration_0.pdf
 build/main.pdf: build/laser.pdf
+build/main.pdf: build/CCE.pdf
 
 build/main.pdf: FORCE | build
 	  TEXINPUTS=build: \

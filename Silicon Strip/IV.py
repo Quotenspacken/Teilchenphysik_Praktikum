@@ -11,7 +11,7 @@ plt.axvline(150, linestyle='--' ,alpha=0.4,color = 'grey')
 plt.plot(V,I,'x',label = 'Measured values')
 plt.plot(V_fit,I_fit,'-',alpha=0.4,label = 'linear regression')
 plt.ylabel(r'$I \mathbin{/} \si{\micro\ampere}$')
-plt.xlabel(r'$V \mathbin{/} \si{\volt}$')
+plt.xlabel(r'$U \mathbin{/} \si{\volt}$')
 plt.legend(loc='best')
 # in matplotlibrc leider (noch) nicht möglich
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)

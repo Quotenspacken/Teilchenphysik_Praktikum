@@ -1,40 +1,72 @@
 \section{Theory}
 \label{sec:theory}
-The theory is splitted into three sections the LHCb in general in \autoref{sec:LHCb}, the decay of the $\text{B}^{+/-}$ Mesons in \autoref{sec:decay} and the Dalitz-plots in \autoref{sec:dalitz}.
+The theory is splitted into three sections the LHCb in general in \autoref{sec:LHCb}, the decay of the $\text{B}^{\pm}$ Mesons in \autoref{sec:decay} and the Dalitz-plots in \autoref{sec:dalitz}.
 \subsection{Large Hadron Collider beauty}
 \label{sec:LHCb}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{content/Figures/LHCb.jpg}
-	\caption[Schematic view of the LHCb Upgrade 2 detector.]{Schematic view of a cross section of the LHCb Upgrade 1 detector \cite{TDR}.}
-	\label{fig:LHCb}
-\end{figure}
-The LHCb detector is constructed as a single-arm forward spectrometer,
-because the $b$-$\bar{b}$ pairs in $pp$ collisions are mainly produced at a small angle relative to the beam axis.
-Therefore, the resulting hadrons are boosted in the same direction \cite{bbangles}.
 
-In Figure \ref{fig:LHCb}, the cross section of the LHCb detector is shown.
-The \textit{Vertex Locator} (VELO) is used to identify and distinguish the primary and secondary vertices of the particles.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{content/Figures/LHCb.png}
+    \caption[Schematic view of the LHCb detector in Run 1.]
+    {Schematic side view of the LHCb detector and its main subdetectors
+    during Run 1 \cite{Vorlage}.}
+    \label{fig:LHCb}
+\end{figure}
+
+The LHCb detector is constructed as a single-arm forward spectrometer,
+because the production of $b$-$\bar{b}$ pairs in $pp$ collisions is strongly
+peaked at small angles relative to the beam axis.
+Therefore, many of the resulting $b$ hadrons enter the forward acceptance
+of the LHCb detector \cite{bbangles}.
+
+In Figure \ref{fig:LHCb}, the LHCb detector configuration used during Run 1
+is shown.
+The \textit{Vertex Locator} (VELO) is used to identify and distinguish the
+primary and secondary vertices of the particles.
 Since these are only a few millimetres apart,
 the VELO is located directly around the interaction point.
-Together with the \textit{Upstream Tracker} (UT),
-the \textit{dipole magnet} and the \textit{SciFi detector}, the VELO forms the spectrometer system of LHCb.
-This system is used to reconstruct particle tracks and to determine the momentum,
-which can be obtained from the deflection of the particles in a magnetic field.
+Together with the \textit{Trigger Tracker} (TT),
+the \textit{dipole magnet} and the tracking stations T1, T2 and T3,
+the VELO forms the tracking system of LHCb.
+The tracking stations consist of the \textit{Inner Tracker} (IT)
+and the \textit{Outer Tracker} (OT).
+This system is used to reconstruct particle tracks and to determine the
+momentum, which can be obtained from the deflection of charged particles
+in a magnetic field.
 
-The detectors \textit{RICH1}, \textit{RICH2}, \textit{ECAL}, \textit{HCAL} and the muon stations \textit{M2} to \textit{M5} are used for particle identification.
-The focus here is on distinguishing electrons, photons, kaons and protons,
+The detectors \textit{RICH1}, \textit{RICH2}, the calorimeter system and the
+muon stations \textit{M1} to \textit{M5} are used for particle identification.
+The focus here is on distinguishing pions, kaons and protons,
+as well as electrons, photons and muons,
 because they are common decay products of $b$ hadrons \cite{TDR}.
-The RICH detectors are used to keep charged hadrons apart, especially pions, kaons and protons.
-They measure the Cherenkov light emitted by charged particles and combine this information with the measured momentum of the track. This allows LHCb to assign a particle hypothesis to each reconstructed track.
-This is essential for B decay analyses, because the final state particles must be identified correctly.
-In the decay $\text{B}^+ \to K^+K^-K^+$, for example, all three charged tracks have to be identified as kaons.
-A wrong particle identification would lead to a wrong reconstructed invariant mass. This leads to the background of the selected signal.\\
-The calorimeters identify photons, electrons and hadrons, while the muon stations identify muons.
-Together with the tracking system, these detectors allow the full reconstruction and classification of the decay products of $b$ hadrons.
-\subsection{$\text{B}^{+/-}$ Mesons in the LHCb}
+The RICH detectors are used to distinguish charged hadrons,
+especially pions, kaons and protons.
+They measure the Cherenkov light emitted by charged particles and combine
+this information with the measured momentum of the track.
+This allows LHCb to assign a particle hypothesis to each reconstructed track.
+
+This is essential for $B$-decay analyses,
+because the final-state particles must be identified correctly.
+In the decay $\text{B}^+ \to K^+K^-K^+$, for example,
+all three charged tracks have to be identified as kaons.
+A pion that is misidentified as a kaon is an important source of background.
+Since the assumed particle mass is used to calculate the particle energy,
+a wrong particle identification changes the reconstructed invariant mass
+of the $B^+$ candidate.
+Such misidentified events can therefore contribute to the background of the
+selected signal.
+
+The calorimeter system consists of the \textit{Scintillating Pad Detector}
+(SPD), the \textit{Preshower Detector} (PS),
+the \textit{Electromagnetic Calorimeter} (ECAL) and the
+\textit{Hadronic Calorimeter} (HCAL).
+The calorimeters identify photons, electrons and hadrons,
+while the muon stations identify muons.
+Together with the tracking system, these detectors allow the full
+reconstruction and classification of the decay products of $b$ hadrons.
+\subsection{$\text{B}^{\pm}$ Mesons in the LHCb}
 \label{sec:decay}
-The B mesons are created in the primary vertex, which is the location of the collision of the proton beams. After a few pikoseconds some of these mesons decay into three Kaons. The decay looks like
+The B mesons are created in the primary vertex, which is the location of the collision of the proton beams. After a few pikoseconds some of these mesons decay into three kaons. The decay looks like
 \begin{equation*}
   \text{B}^+ \to K^+ \, K^- \, K^+
 \end{equation*}
@@ -131,7 +163,7 @@ In $B$ meson decays, different decay paths can lead to the same final state with
 \label{sec:dalitz}
 Dalitz plots are used to describe three-body decays. For each event, two invariant masses of two-particle combinations are calculated and plotted against each other. In this way, each reconstructed decay gives one point in the Dalitz plot. Therefore, Dalitz plots are used to study local CP asymmetries.
 
-For the $\text{B}^{+/-}$-decay the variables are set to
+For the $\text{B}^{\pm}$-decay the variables are set to
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{equation*}
 m^2(m_1 m_2)
