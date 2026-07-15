@@ -13,8 +13,7 @@ def load_calibration_txt(filename):
         text = f.read().replace(",", ".")
 
     return np.genfromtxt(StringIO(text))
-
-
+ 
 delay_data = {}
 best_delays = {}
 for strip in delay_strips:
@@ -85,28 +84,15 @@ fig.savefig("build/calibration.pdf")
 plt.close(fig)
 
 charge_fit = np.linspace(np.min(charge), np.max(charge), 500)
-adc_fit = {}
-coefficients = {}
+mean_coeffs = np.polyfit(charge, adc_mean, 4)
+mean_adc_fit = np.polyval(mean_coeffs, charge_fit)
 
 fig, ax = plt.subplots()
 for strip in used_calibration_strips:
     i = calibration_strips.index(strip)
-    coeffs = np.polyfit(charges[i], adcs[i], 4)
-    coefficients[strip] = coeffs
-    adc_fit[strip] = np.polyval(coeffs, charge_fit)
     ax.plot(charges[i], adcs[i], "o", markersize=3, alpha=0.15, label=f"Strip {strip}")
-    ax.plot(charge_fit, adc_fit[strip], "-", alpha=0.6)
-    print(f"Values for ADC(Q) calibration curve {strip}:")
-    print(f"a_4 = {coeffs[0]}")
-    print(f"a_3 = {coeffs[1]}")
-    print(f"a_2 = {coeffs[2]}")
-    print(f"a_1 = {coeffs[3]}")
-    print(f"a_0 = {coeffs[4]}")
-
-mean_coeffs = np.polyfit(charge, adc_mean, 4)
-mean_adc_fit = np.polyval(mean_coeffs, charge_fit)
 ax.plot(charge, adc_mean, "o", markersize=3, color="tab:red", alpha=0.35, label="Mean without strip 124")
-ax.plot(charge_fit, mean_adc_fit, "-", color="tab:red", label="Mean fit")
+ax.plot(charge_fit, mean_adc_fit, "-", color="tab:red", label="4th degree fit to mean")
 print("Values for mean ADC(Q) calibration curve without strip 124:")
 print(f"a_4 = {mean_coeffs[0]}")
 print(f"a_3 = {mean_coeffs[1]}")

@@ -21,15 +21,14 @@ sync_signal = sync[:, 1]
 optimal_delay = delay[np.nanargmax(sync_signal)]
 
 strip_max = np.max(laser_scan, axis=0)
-signal_strips = strips[strip_max > 80]
+signal_strips = strips[strip_max > 30]
 positive_signal = np.clip(laser_scan[:, signal_strips], 0, None)
 summed_signal = np.sum(positive_signal, axis=1)
 
-peak_indices, _ = find_peaks(summed_signal, distance=2, height=20)
+peak_indices, _ = find_peaks(summed_signal, distance=2, height=50)
 peak_positions = positions[peak_indices]
 pitch = np.mean(np.diff(peak_positions))
 pitch_std = np.std(np.diff(peak_positions), ddof=1)
-
 laser_widths = []
 for strip in signal_strips:
     signal = laser_scan[:, strip]
@@ -41,13 +40,47 @@ for strip in signal_strips:
         laser_widths.append(above_half[-1] - above_half[0])
 laser_width = np.mean(laser_widths)
 
+strip_peak_positions = np.array([
+    positions[np.argmax(laser_scan[:, strip])]
+    for strip in signal_strips
+], dtype=float)
+strip_peak_adcs = np.array([
+    np.max(laser_scan[:, strip])
+    for strip in signal_strips
+])
+peak_height_groups = [
+    ("30-45 ADC", (strip_peak_adcs >= 30) & (strip_peak_adcs < 45)),
+    ("45-65 ADC", (strip_peak_adcs >= 45) & (strip_peak_adcs < 65)),
+    (">80 ADC", strip_peak_adcs >= 80),
+]
+group_pitch_means = []
+
+for group_name, group_mask in peak_height_groups:
+    group_strips = signal_strips[group_mask]
+    group_positions = strip_peak_positions[group_mask]
+    if len(group_strips) < 2:
+        continue
+
+    order = np.argsort(group_strips)
+    group_strips = group_strips[order]
+    group_positions = group_positions[order]
+    group_pitches = np.abs(np.diff(group_positions) / np.diff(group_strips))
+    group_pitch_means.append(np.mean(group_pitches))
+
+grouped_strip_pitch = np.mean(group_pitch_means)
+grouped_strip_pitch_std = np.std(group_pitch_means, ddof=1)
+
 print(f"Laser scan data: {laser_scan.shape[0]} positions, {laser_scan.shape[1]} strips")
 print(f"Optimal laser delay: {optimal_delay:.0f} ns")
 print(f"Relevant strips: {signal_strips.tolist()}")
 print(f"Signal maxima spacing: ({pitch:.1f} +- {pitch_std:.1f}) um")
+print(
+    "Grouped strip spacing from equal-height peaks: "
+    f"({grouped_strip_pitch:.1f} +- {grouped_strip_pitch_std:.1f}) um"
+)
 print(f"Laser FWHM from focused strip peaks: about {laser_width:.0f} um")
 
-fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+fig, axes = plt.subplots(2, 1, figsize=(10, 7))
 
 for strip in signal_strips:
     axes[0].plot(positions, laser_scan[:, strip], "-", linewidth=0.8, label=f"{strip}")
@@ -56,8 +89,8 @@ axes[0].set_ylabel(r"$\text{ADC}$")
 axes[0].legend(
     loc="center left",
     bbox_to_anchor=(1.02, 0.5),
-    ncol=1,
-    fontsize="x-small",
+    ncol=2,
+    fontsize="xx-small",
     title="Strip",
 )
 

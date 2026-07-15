@@ -4,6 +4,7 @@ from scipy.optimize import curve_fit
 V, I = np.genfromtxt('IV.txt',unpack = True)
 linearArea = (V>=70)&(V<=150)
 m, b = np.polyfit(V[linearArea], I[linearArea], 1)
+print(m)
 V_fit = np.linspace(70,150,200)
 I_fit = m*V_fit+b
 plt.axvline(70, linestyle='--' ,alpha=0.4,color = 'grey', label = 'Cut of linearity')

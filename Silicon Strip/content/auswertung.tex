@@ -1,2 +1,120 @@
 \section{Analysis}
 \label{sec:Analysis}
+At first, the current-voltage measurement is analyzed. The result is shown in \autoref{fig:IV}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{build/IV.pdf}
+\caption{The current plotted against voltages with a linear regression, calculated with SciPy \cite{scipy}.}
+\label{fig:IV}
+\end{figure}
+The linear gradient starts at $\SI{70}{\volt}$, which is also visualized in \autoref{fig:IV}. At $\SI{150}{\volt}$ the further current values are constant. It could be, that the control unit do not lift the voltage anymore. By considering that, the linear regression between those points is plotted in this area. The gradient of this fit is $m_{\text{IV}} \approx \SI{0.0051}{{\micro\ampere}\per\volt}$. The voltage of $\SI{90}{\volt}$ is set to deplete the sensor.\\\\
+The next measurement is about the pedestal and noise. The result is plotted in \autoref{fig:pedestal}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{build/pedestal.pdf}
+\caption{The mean values and the errors of the pedestal signal plotted in the upper figure and the common mode of the signal shown in a histogram plotted in the lower figure.}
+\label{fig:pedestal}
+\end{figure}
+The upper figure shows the noisy character of the signal. Therefore after substract the pedestal from the signal, the histogram of the common mode shows, that the expected value is about zero. The standard deviation is $\sigma \approx \num{2.5} \text{ADC Counts}$. It shows that after substract the pedestal signal the outcome is much less noisy.\\\\
+The calibration starts with the delay measurement. In this case, there are two different delay plots. One for the 28th strip and one for the 100th strip. The result of the delay plots is given in \autoref{fig:delay}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{build/calibration_delay.pdf}
+\caption{The delay scan of two different strips.}
+\label{fig:delay}
+\end{figure}
+The delay is set to $\SI{64}{\nano\second}$. After this the calibration plots are performed and summarized in the \autoref{fig:calibration}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{build/calibration.pdf}
+\caption{The calibration measurements plotted together.}
+\label{fig:calibration}
+\end{figure}
+The measurement of the 124th strip deviates significantly from what was expected. In this case the last measurement was canceled in progress and the system was restarted. Maybe the ADC range was changed and that is why there are no larger values for the ADC Counts. In this protocol the 124th strip is excluded from the further analysis. There is a 4th degree polynomial fit through the mean values. The fit parameters for the calibration curve $ADC_{\text{fit}}(Q)$ and for the inverse calibration curve $Q_{\text{fit}}(ADC)$ are listed in \autoref{tab:calibration_parameters}.
+\begin{table}[h]
+\centering
+\caption{Fit parameters for the calibration curve and the inverse calibration curve.}
+\label{tab:calibration_parameters}
+\begin{tabular}{c S[table-format=-1.4e-2] S[table-format=-1.4e1]}
+\toprule
+Coefficient & \multicolumn{1}{c}{$ADC_{\text{fit}}(Q)$} & \multicolumn{1}{c}{$Q_{\text{fit}}(ADC)$} \\
+\midrule
+$a_4$ & -3.7517e-21 & 5.0278e-4 \\
+$a_3$ & 3.1201e-14 & -2.5021e-1 \\
+$a_2$ & -1.8777e-8 & 4.0445e1 \\
+$a_1$ & 3.9081e-3 & -1.9130e3 \\
+$a_0$ & -3.7684 & 2.5834e4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+There is also one measurement, where the voltage is set to $\SI{0}{\volt}$. This is plotted in \autoref{fig:calibration_0}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{build/calibration_0.pdf}
+\caption{The calibration measurement with a voltage of $\SI{0}{\volt}$.}
+\label{fig:calibration_0}
+\end{figure}
+The values of the $\SI{0}{\volt}$ bias are lower than the other calibration curves. With no voltage the depletion zone is almost vanished and the inducated charge becomes lower and that is why the ADC Counts are lower for a voltage of $\SI{0}{\volt}$.\\\\
+The next measurement is about the Laser. The Laser position is set from $\SI{10}{\micro\meter}$ to $\SI{350}{\micro\meter}$ with the stepsize of $\SI{10}{\micro\meter}$. For every strip the ADC Counts are plotted against the Laserposition. This is shown in \autoref{fig:laser}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{build/laser.pdf}
+\caption{The ADC Counts against the Laserposition plotted for every relevant strips.}
+\label{fig:laser}
+\end{figure}
+There are only the strips plotted which are relevant, because not every strip has a clear peak measured. That is why, if the laser hovers straight over a strip, there is no signal detected from this strip. In this case, there are only the strips plotted, which has once more ADC Counts than $\num{30}$ Counts. There is also a figure where the Signal is summed over all strips and those maxima are also highlighted.\\
+The peaks over $\num{90}$ Counts are used to analyze the distances. The calculated distances are listed in \autoref{tab:laser_strip_distances}.
+\begin{table}[h]
+\centering
+\caption{Strip distances calculated from laser peaks with more than $\num{90}$ ADC counts.}
+\label{tab:laser_strip_distances}
+\begin{tabular}{ccc}
+\toprule
+Strip pair & Peak positions $\mathbin{/} \si{\micro\meter}$ & Distance $\mathbin{/} \si{\micro\meter}$ \\
+\midrule
+$87$--$89$ & $310$--$290$ & $\num{10.0}$ \\
+$89$--$92$ & $290$--$230$ & $\num{20.0}$ \\
+$92$--$97$ & $230$--$160$ & $\num{14.0}$ \\
+$97$--$99$ & $160$--$130$ & $\num{15.0}$ \\
+$99$--$100$ & $130$--$100$ & $\num{30.0}$ \\
+$100$--$102$ & $100$--$70$ & $\num{15.0}$ \\
+\midrule
+\multicolumn{2}{c}{Mean distance} & $\num{17.333} \pm \num{6.976}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+This leads to a mean distance between strips of $d_{\text{strip}}=\left(\num{17.3} \pm \num{7.0}\right)\si{\micro\meter}$. The extension of the laser is estimated from the full width at half maximum of the focused strip peaks and is about $\SI{10}{\micro\meter}$.\\\\
+For the charge collection efficiency (CCE) measurement the signal of strip $\num{84}$ is used. The relative CCE is normalized to the mean signal in the high-voltage region above $\SI{120}{\volt}$
+\begin{equation}
+    CCE(U)=\frac{S_{84}(U)}{S_{\text{ref}}}, \quad
+    S_{\text{ref}}=\frac{1}{N}\sum_{U_i\geq\SI{120}{\volt}} S_{84}(U_i)
+    =\SI{105.85}{ADC}.
+\end{equation}
+The measurement is shown in \autoref{fig:CCE}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{build/CCE.pdf}
+\caption{The CCE measurement with a fit by using the \autoref{eqn:CCE}.}
+\label{fig:laser}
+\end{figure}
+A fit is performed with the depletion voltage $U_{\text{dep}}=\SI{70}{\volt}$ and the sensor thickness $d_{\text{sensor}}=\SI{300}{\micro\meter}$. The used equation is
+\begin{equation}
+    CCE_{\text{fit}}(U)=
+    \begin{cases}
+        A \cdot
+        \dfrac{1-\exp\left(-d_{\text{sensor}}\sqrt{U/U_{\text{dep}}}/a\right)}
+        {1-\exp\left(-d_{\text{sensor}}/a\right)},
+        & U\leq U_{\text{dep}},\\[1.2em]
+        A + m\left(U-U_{\text{dep}}\right),
+        & U>U_{\text{dep}}.
+        \label{eqn:CCE}
+    \end{cases}
+\end{equation}
+This fit results in the fit parameters
+\begin{equation}
+    a=\left(\num{323}\pm\num{36}\right)\si{\micro\meter}, \quad
+    A=\num{0.945}\pm\num{0.008}, \quad
+    m=\left(\num{0.0006}\pm\num{0.0001}\right)\si{\per\volt},
+\end{equation}
+with the penetration depth $a$, the scaling factor $A$ and the gradient of the plateau $m$. Compared to the gradient of the current-voltage measurement
+$m_{\text{IV}}$, the plateau gradient is much smaller.

@@ -22,15 +22,15 @@ sensor_thickness = 300.0
 depletion_voltage = 70.0
 
 
-def cce_model(voltage, penetration_depth, plateau_height, plateau_slope):
+def cce_model(voltage, a, plateau_height, plateau_slope):
     voltage = np.asarray(voltage)
     depletion_depth = sensor_thickness * np.sqrt(
         np.minimum(voltage, depletion_voltage) / depletion_voltage
     )
     below_depletion = plateau_height * (
-        1 - np.exp(-depletion_depth / penetration_depth)
+        1 - np.exp(-depletion_depth / a)
     ) / (
-        1 - np.exp(-sensor_thickness / penetration_depth)
+        1 - np.exp(-sensor_thickness / a)
     )
     above_depletion = plateau_height + plateau_slope * (voltage - depletion_voltage)
     return np.where(voltage <= depletion_voltage, below_depletion, above_depletion)
@@ -44,15 +44,15 @@ fit_params, fit_cov = curve_fit(
     p0=[300, 0.95, 5e-4],
     bounds=([1, 0, -1], [5000, 2, 1]),
 )
-penetration_depth = fit_params[0]
+a = fit_params[0]
 plateau_height = fit_params[1]
 plateau_slope = fit_params[2]
-penetration_depth_err, plateau_height_err, plateau_slope_err = np.sqrt(np.diag(fit_cov))
+a_err, plateau_height_err, plateau_slope_err = np.sqrt(np.diag(fit_cov))
 voltage_fit = np.linspace(0, np.max(voltages), 500)
 
 print(f"CCE hit strip: {hit_strip}")
 print(f"CCE plateau signal: {plateau_signal:.2f} ADC")
-print(f"Laser penetration depth: ({penetration_depth:.0f} +- {penetration_depth_err:.0f}) um")
+print(f"Fit parameter a: ({a:.0f} +- {a_err:.0f}) um")
 print(f"Fitted plateau height: {plateau_height:.3f} +- {plateau_height_err:.3f}")
 print(f"Fitted plateau slope: ({plateau_slope:.4f} +- {plateau_slope_err:.4f}) / V")
 
@@ -60,7 +60,7 @@ fig, ax = plt.subplots()
 ax.plot(voltages, cce, "o", markersize=3, label="Measured CCE")
 ax.plot(
     voltage_fit,
-    cce_model(voltage_fit, penetration_depth, plateau_height, plateau_slope),
+    cce_model(voltage_fit, a, plateau_height, plateau_slope),
     "-",
     label="CCE fit",
 )
