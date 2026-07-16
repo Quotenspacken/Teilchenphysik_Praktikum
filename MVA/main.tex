@@ -1,0 +1,33 @@
+\documentclass[
+  bibliography=totoc,     % Literatur im Inhaltsverzeichnis
+  captions=tableheading,  % Tabellenüberschriften
+  titlepage=firstiscover, % Titelseite ist Deckblatt
+]{scrartcl}
+
+\input{header.tex}
+
+
+\title{Selection of $B_s^0 \to ψ \left(2S\right)\, K_s^0$ events}
+\date{%
+  Execution: July 13, 2026
+  \hspace{3em}
+  Submission: \today
+}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+\input{content/1_intro.tex}
+\input{content/2_theory.tex}
+\input{content/3_exp_setup_conduction.tex}
+\input{content/auswertung.tex}
+\input{content/diskussion.tex}
+
+\printbibliography{}
+
+\end{document} 
+ 
