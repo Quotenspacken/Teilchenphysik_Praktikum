@@ -30,7 +30,7 @@ The delay is set to $\SI{64}{\nano\second}$. After this the calibration plots ar
 \caption{The calibration measurements plotted together.}
 \label{fig:calibration}
 \end{figure}
-The measurement of the 124th strip deviates significantly from what was expected. In this case the last measurement was canceled in progress and the system was restarted. Maybe the ADC range was changed and that is why there are no larger values for the ADC Counts. In this protocol the 124th strip is excluded from the further analysis. There is a 4th degree polynomial fit through the mean values. The fit parameters for the calibration curve $ADC_{\text{fit}}(Q)$ and for the inverse calibration curve $Q_{\text{fit}}(ADC)$ are listed in \autoref{tab:calibration_parameters}.
+The measurement of the 124th strip deviates significantly from what was expected. In this case the last measurement was canceled in progress and the system was restarted. Maybe the ADC range was changed and that is why there are no larger values for the ADC Counts. In this protocol the 124th strip is excluded from the further analysis. There is a 4th degree polynomial fit of the mean values. The fit parameters for the calibration curve $ADC_{\text{fit}}(Q)$ and for the inverse calibration curve $Q_{\text{fit}}(ADC)$ are listed in \autoref{tab:calibration_parameters}.
 \begin{table}[h]
 \centering
 \caption{Fit parameters for the calibration curve and the inverse calibration curve.}
@@ -95,7 +95,7 @@ The measurement is shown in \autoref{fig:CCE}.
 \centering
 \includegraphics[width=0.8\textwidth]{build/CCE.pdf}
 \caption{The CCE measurement with a fit by using the \autoref{eqn:CCE}.}
-\label{fig:laser}
+\label{fig:CCE}
 \end{figure}
 A fit is performed with the depletion voltage $U_{\text{dep}}=\SI{70}{\volt}$ and the sensor thickness $d_{\text{sensor}}=\SI{300}{\micro\meter}$. The used equation is
 \begin{equation}
