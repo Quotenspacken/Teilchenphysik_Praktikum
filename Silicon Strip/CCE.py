@@ -1,7 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+import matplotlib as mpl
+from pathlib import Path
 
+header = Path(__file__).parent / "header-matplotlib.tex"
+
+mpl.rcParams["pgf.preamble"] = rf"\input{{{header.as_posix()}}}"
+
+print("Backend:", plt.get_backend())
+print("usetex:", plt.rcParams["text.usetex"])
+print("preamble:", plt.rcParams["pgf.preamble"])
 
 voltages = []
 cce_signals = []

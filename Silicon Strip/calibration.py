@@ -1,6 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from io import StringIO
+import matplotlib as mpl
+from pathlib import Path
+
+header = Path(__file__).parent / "header-matplotlib.tex"
+
+mpl.rcParams["pgf.preamble"] = rf"\input{{{header.as_posix()}}}"
 
 calibration_strips = [28, 52, 76, 100, 124]
 used_calibration_strips = [28, 52, 76, 100]

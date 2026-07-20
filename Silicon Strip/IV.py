@@ -1,6 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
+import matplotlib as mpl
+from pathlib import Path
+
+header = Path(__file__).parent / "header-matplotlib.tex"
+
+mpl.rcParams["pgf.preamble"] = rf"\input{{{header.as_posix()}}}"
+
+
 V, I = np.genfromtxt('IV.txt',unpack = True)
 linearArea = (V>=70)&(V<=150)
 m, b = np.polyfit(V[linearArea], I[linearArea], 1)

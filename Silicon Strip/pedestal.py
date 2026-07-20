@@ -1,5 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
+from pathlib import Path
+
+header = Path(__file__).parent / "header-matplotlib.tex"
+
+mpl.rcParams["pgf.preamble"] = rf"\input{{{header.as_posix()}}}"
 
 adc = np.genfromtxt(
     "measurement/Pedestal.txt",
