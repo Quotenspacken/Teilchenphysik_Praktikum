@@ -96,3 +96,4 @@ where $\varepsilon_{\mathrm{S}}$ denotes the classification efficiency of the si
 
 \subsubsection{k-fold cross validation}
 \label{sec:k-fold}
+To check whether the BDT is overfitting, a validation procedure is required. In this analysis, $k$-fold cross validation is used. The dataset is divided into $k$ approximately equally sized folds. In each iteration, the BDT is trained on $k-1$ folds, while the remaining fold is used for validation. This procedure is repeated $k$ times, such that each fold is used exactlyonce as the validation dataset. The classifier performance is then evaluated by using the ROC-curve and AUC. Consistent ROC-curves and AUC values for all folds indicate a stable classifier, while large variations may suggest overfitting.
