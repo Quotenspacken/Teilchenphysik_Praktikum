@@ -1,6 +1,6 @@
 \section{Theory}
 \label{sec:theory}
-The theory is splitted into X sections the LHCb in general in \autoref{sec:LHCb}.
+The theory is splitted into three subsections: the LHCb in general in \autoref{sec:LHCb}, the $B_s^0 \to \psi \left(2S\right)\, K_s^0$ events in \autoref{sec:B} and the multivariate analysis in \autoref{sec:mva}. The last subsection is further divided into features selection in \autoref{sec:features}, boosted decision trees (BDT) in \autoref{sec:bdt} and k-fold cross validation in \autoref{sec:k-fold}.
 \subsection{Large Hadron Collider beauty}
 \label{sec:LHCb}
 
@@ -45,17 +45,6 @@ They measure the Cherenkov light emitted by charged particles and combine
 this information with the measured momentum of the track.
 This allows LHCb to assign a particle hypothesis to each reconstructed track.
 
-This is essential for $B$-decay analyses,
-because the final-state particles must be identified correctly.
-In the decay $\text{B}^+ \to K^+K^-K^+$, for example,
-all three charged tracks have to be identified as kaons.
-A pion that is misidentified as a kaon is an important source of background.
-Since the assumed particle mass is used to calculate the particle energy,
-a wrong particle identification changes the reconstructed invariant mass
-of the $B^+$ candidate.
-Such misidentified events can therefore contribute to the background of the
-selected signal.
-
 The calorimeter system consists of the \textit{Scintillating Pad Detector}
 (SPD), the \textit{Preshower Detector} (PS),
 the \textit{Electromagnetic Calorimeter} (ECAL) and the
@@ -64,3 +53,46 @@ The calorimeters identify photons, electrons and hadrons,
 while the muon stations identify muons.
 Together with the tracking system, these detectors allow the full
 reconstruction and classification of the decay products of $b$ hadrons.
+
+
+\subsection{$B_s^0 \to ψ \left(2S\right)\, K_s^0$ events}
+\label{sec:B}
+In this protocol, the $B_s^0 \to \psi \left(2S\right)\, K_s^0$ is analyzed. The $B_s^0$ meson decays into a $\psi \left(2S\right)$ meson and a $K_s^0$ meson. The feynman diagram is shown in \autoref{fig:decay}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.58\textwidth]{content/Figures/decay.png}
+    \caption[Feynman diagram of the $B_s^0$ decay]
+    {Feynman diagram of the $B_s^0$ decay \cite{Vorlage}.}
+    \label{fig:decay}
+\end{figure}
+The $\psi \left(2S\right)$ meson decays into $\mu^+\,\mu^-$ and the $K_s^0$ meson into $\pi^+ \, \pi^-$. These resulting products are detected in the LHCb.
+From this, the daughter particles are reconstructed and leads to the four-momentum from a possible $B$ meson. Besides the $B_s^0$ meson, there is a $B^0$ meson which only differs by the quark composition. The $B^0$ consists of one anti-bottom quark and one down quark, while the $B_s^0$ meson consists of one anti-bottom quark and one strange quark. The $B_s^0$ meson is therefore heavier than the $B^0$ meson. The end result is the same. That is why the invariante mass is analyzed to differentiate both mesons.\\
+The $B^0$ meson is much more common than the $B_s^0$ meson and the combinatorial background is large, so the $B_s^0$ signal is at first not visible. That causes the need of the multivariate analysis.
+
+
+\subsection{Multivariate analysis}
+\label{sec:mva}
+Even after the particle identification and the basic selection criteria have been applied, the selected sample still contains a large combinatorial background. Therefore, an additional selection based on a multivariate analysis is performed.\\
+For this purpose, simulated $B_s^0$ decay events are used as the signal sample, since their true origin is known from the Monte Carlo simulation. The background sample is obtained from the upper sideband of the invariant mass distribution. The multivariate analysis in this context consists of three main steps: the selection of input variables, the training of a boosted decision tree (BDT), and the cross validation by using k-folds.
+
+
+\subsubsection{Feature selection}
+\label{sec:features}
+In this dataset, more than $\num{800}$ variables are available, although not all of them provide useful information for the classification. Therefore, a feature selection is performed to identify the most suitable input variables for the multivariate analysis. Variables that are strongly correlated with the invariant mass are removed in order to prevent a bias in the mass distribution after the BDT selection. In addition, the agreement between simulation and data is evaluated using the $B^0$ control channel. Variables that are not modelled sufficiently well in the simulation are excluded from the analysis. The remaining variables are then used as input features for the BDT.
+
+
+\subsubsection{Boosted decision trees (BDT)}
+\label{sec:bdt}
+A decision tree remains to machine learning and consists a seed, internal nodes, and leaf nodes, which classifies the values to the background or the signal. Therefore the decision tree classifies an event by passing it through a sequence of binary decisions. At each internal node, the value of one input feature is compared with a threshold, which determines which branch is followed. This process continues until the leaf is reached.\\\\
+One decision tree is not a well option because the tree can overfit very fast. When a tree overfits, the algorithm learns the sample by heart. This results for example for a large tree depth. To avoid this, there is the concept of boosted decision trees. A boosted decision tree combines many individual decision trees into a single classifier. The trees are trained sequentially, where each new tree focuses more strongly on events that were misclassified by the previous trees. The predictions of all trees are then combined to obtain the final classifier response. In this way, several weak classifiers form a more powerful and robust model. This model also depends on the tree depths, the number of trees and the learning rate. The main goal is to focus on overfitting, so that the classifier can identify the classes of the real dataset well.\\\\
+In this protocol, there are two different concepts to optimize the BDT. The first one is the ''Receiver Operating Characteristic (ROC)''-curve. The true positive rate is plotted against the false positive rate. This is used to evaluate the classification performance of the BDT. A curve close to the upper-left corner indicates a good separation between signal and background.\\
+The overall performance can be summarized by the area under the curve (AUC). If this area is equal one, the classifier works perfectly and if the area is equal $\num{0.5}$ the classifier choses random the classes.\\\\
+The other concept is the Figure of Merit (FOM). The FOM is used to determine the optimal threshold of the BDT classifier response. It balances a high signal efficiency against a low number of expected background events. In this analysis, \autoref{eqn:fom} is used
+\begin{equation}
+    \mathrm{FOM} = \frac{\varepsilon_{\mathrm{S}}}{\frac{5}{2}-\sqrt{N_{\text{bkg}}}},
+    \label{eqn:fom}
+\end{equation}
+where $\varepsilon_{\mathrm{S}}$ denotes the classification efficiency of the signal and $N_{\text{bkg}}$ is the number of background events in the signal region. The BDT threshold that maximizes the FOM is selected for the final event selection.
+
+\subsubsection{k-fold cross validation}
+\label{sec:k-fold}
