@@ -1,2 +1,28 @@
 \section{Discussion}
 \label{sec:Discussion}
+While the presented analysis yields a statistically significant $B_s$ signal, 
+several simplifications and limitations should be noted.
+
+The thresholds used in the feature selection (Kolmogorov-Smirnov 
+statistic of $0.6$ for simulation/data agreement, $0.5$ for separation 
+power, and a correlation of $0.8$ with the invariant mass) were chosen 
+rather loosely. Stricter cuts would have removed too many features, 
+leaving an insufficient number for a stable BDT training. As a result, 
+the selection should be understood as a pragmatic compromise rather 
+than a rigorously optimized choice, and the stability of the classifier 
+with respect to these thresholds was not systematically studied.
+
+The significance proxy $m$ used here is a simplified estimator and 
+does not correspond to a rigorous statistical treatment, such as one 
+based on profile likelihoods or toy Monte Carlo studies. It also does 
+not account for systematic uncertainties, e.g.\ from the choice of fit 
+model, the sideband-based background estimation, or the simulation 
+samples used to fix the peak shapes. In particular, the assumption 
+that the sideband region above the $B_s$ mass accurately represents 
+the combinatorial background under the signal peaks was not validated.
+
+Finally, the relatively low number of signal events ($n_{\text{sig}} 
+\approx 51$) limits the statistical precision of the result and makes 
+the fit sensitive to the exact definition of the signal region. A more 
+robust treatment would involve varying the signal window and assessing 
+the resulting stability of $n_{\text{sig}}$, $n_{\text{bkg}}$, and $m$.
