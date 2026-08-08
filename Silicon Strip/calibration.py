@@ -70,6 +70,9 @@ used_indices = [
 ]
 charge = charges[0]
 adc_mean = np.mean(adcs[used_indices], axis=0)
+charge_fit = np.linspace(np.min(charge), np.max(charge), 500)
+mean_coeffs = np.polyfit(charge, adc_mean, 4)
+mean_adc_fit = np.polyval(mean_coeffs, charge_fit)
 
 fig, ax = plt.subplots()
 for i, strip in enumerate(calibration_strips):
@@ -81,6 +84,7 @@ for i, strip in enumerate(calibration_strips):
         alpha = 0.25
     ax.plot(charges[i], adcs[i], "o", markersize=3, alpha=alpha, label=label)
 ax.plot(charge, adc_mean, "-", color="tab:red", label="Mean without strip 124")
+ax.plot(charge_fit, mean_adc_fit, "--", color="tab:blue", label="4th degree fit")
 plt.ylabel(r'$\text{ADC}$')
 plt.xlabel(r'$Q_{\text{ind}} \mathbin{/} e$')
 plt.legend(loc="best")
@@ -88,10 +92,6 @@ plt.legend(loc="best")
 fig.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 fig.savefig("build/calibration.pdf")
 plt.close(fig)
-
-charge_fit = np.linspace(np.min(charge), np.max(charge), 500)
-mean_coeffs = np.polyfit(charge, adc_mean, 4)
-mean_adc_fit = np.polyval(mean_coeffs, charge_fit)
 
 fig, ax = plt.subplots()
 for strip in used_calibration_strips:

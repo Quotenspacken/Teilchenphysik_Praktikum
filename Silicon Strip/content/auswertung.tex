@@ -15,7 +15,7 @@ The next measurement is about the pedestal and noise. The result is plotted in \
 \caption{The mean values and the errors of the pedestal signal plotted in the upper figure and the common mode of the signal shown in a histogram plotted in the lower figure.}
 \label{fig:pedestal}
 \end{figure}
-The upper figure shows the noisy character of the signal. Therefore after substract the pedestal from the signal, the histogram of the common mode shows, that the expected value is about zero. The standard deviation is $\sigma \approx \num{2.5} \text{ADC Counts}$. It shows that after substract the pedestal signal the outcome is much less noisy.\\\\
+The upper figure shows the pedestal values, which are measured without a source for each channel. After subtracting these pedestal values, the common mode distribution is centered around zero. The common mode measurement is used to search for a common shift of all channels, for example due to noise from the electrical network. Together with the pedestal run this gives a noise of about $\sigma \approx \num{2.5} \text{ADC Counts}$ for the channels, which is subtracted from the measured signals in the further analysis.\\\\
 The calibration starts with the delay measurement. In this case, there are two different delay plots. One for the 28th strip and one for the 100th strip. The result of the delay plots is given in \autoref{fig:delay}.
 \begin{figure}[h]
 \centering
@@ -23,11 +23,11 @@ The calibration starts with the delay measurement. In this case, there are two d
 \caption{The delay scan of two different strips.}
 \label{fig:delay}
 \end{figure}
-The delay is set to $\SI{64}{\nano\second}$. After this the calibration plots are performed and summarized in the \autoref{fig:calibration}.
+The delay is the waiting time after the trigger condition before the buffer is sent to the computer, so that the signal information is contained in the buffer. From the delay scan it is set to $\SI{64}{\nano\second}$. After this the calibration plots are performed and summarized in the \autoref{fig:calibration}.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{build/calibration.pdf}
-\caption{The calibration measurements plotted together.}
+\caption{The calibration measurements plotted together with the mean calibration curve and its polynomial fit.}
 \label{fig:calibration}
 \end{figure}
 The measurement of the 124th strip deviates significantly from what was expected. In this case the last measurement was canceled in progress and the system was restarted. Maybe the ADC range was changed and that is why there are no larger values for the ADC Counts. In this protocol the 124th strip is excluded from the further analysis. There is a 4th degree polynomial fit of the mean values. The fit parameters for the calibration curve $ADC_{\text{fit}}(Q)$ and for the inverse calibration curve $Q_{\text{fit}}(ADC)$ are listed in \autoref{tab:calibration_parameters}.
@@ -54,7 +54,7 @@ There is also one measurement, where the voltage is set to $\SI{0}{\volt}$. This
 \caption{The calibration measurement with a voltage of $\SI{0}{\volt}$.}
 \label{fig:calibration_0}
 \end{figure}
-The values of the $\SI{0}{\volt}$ bias are lower than the other calibration curves. With no voltage the depletion zone is almost vanished and the inducated charge becomes lower and that is why the ADC Counts are lower for a voltage of $\SI{0}{\volt}$.\\\\
+The values of the $\SI{0}{\volt}$ bias are lower than the other calibration curves. The calibration charge is injected directly into the strips, so this is not caused by a smaller induced calibration charge. At the working voltage there is additional noise and background from the detector, whose charges can reach the strips and add to the injected calibration signal. At $\SI{0}{\volt}$ the detector itself has almost no contribution, which leads to lower ADC counts.\\\\
 The next measurement is about the Laser. The Laser position is set from $\SI{10}{\micro\meter}$ to $\SI{350}{\micro\meter}$ with the stepsize of $\SI{10}{\micro\meter}$. For every strip the ADC Counts are plotted against the Laserposition. This is shown in \autoref{fig:laser}.
 \begin{figure}[h]
 \centering
@@ -62,28 +62,33 @@ The next measurement is about the Laser. The Laser position is set from $\SI{10}
 \caption{The ADC Counts against the Laserposition plotted for every relevant strips.}
 \label{fig:laser}
 \end{figure}
-There are only the strips plotted which are relevant, because not every strip has a clear peak measured. That is why, if the laser hovers straight over a strip, there is no signal detected from this strip. In this case, there are only the strips plotted, which has once more ADC Counts than $\num{30}$ Counts. There is also a figure where the Signal is summed over all strips and those maxima are also highlighted.\\
-The peaks over $\num{90}$ Counts are used to analyze the distances. The calculated distances are listed in \autoref{tab:laser_strip_distances}.
+There are only the strips plotted which are relevant, because not every strip has a clear peak measured. That is why, if the laser hovers straight over a strip, there is no signal detected from this strip. In this case, there are only the strips plotted, which has once more ADC Counts than $\num{30}$ Counts. There is also a figure where the Signal is summed over all strips and the local minima are highlighted.\\
+The strip distance should be estimated from the distance between neighboring minima of the summed signal, because the minima indicate positions where the laser is above a strip. The calculated distances are listed in \autoref{tab:laser_strip_distances}.
 \begin{table}[h]
 \centering
-\caption{Strip distances calculated from laser peaks with more than $\num{90}$ ADC counts.}
+\caption{Strip distances calculated from neighboring minima of the summed laser signal.}
 \label{tab:laser_strip_distances}
 \begin{tabular}{ccc}
 \toprule
-Strip pair & Peak positions $\mathbin{/} \si{\micro\meter}$ & Distance $\mathbin{/} \si{\micro\meter}$ \\
+Minima positions $\mathbin{/} \si{\micro\meter}$ & Distance $\mathbin{/} \si{\micro\meter}$ & Corrected distance $\mathbin{/} \si{\micro\meter}$ \\
 \midrule
-$87$--$89$ & $310$--$290$ & $\num{10.0}$ \\
-$89$--$92$ & $290$--$230$ & $\num{20.0}$ \\
-$92$--$97$ & $230$--$160$ & $\num{14.0}$ \\
-$97$--$99$ & $160$--$130$ & $\num{15.0}$ \\
-$99$--$100$ & $130$--$100$ & $\num{30.0}$ \\
-$100$--$102$ & $100$--$70$ & $\num{15.0}$ \\
+\num{30}--\num{60} & \num{30} & \num{300} \\
+\num{60}--\num{90} & \num{30} & \num{300} \\
+\num{90}--\num{110} & \num{20} & \num{200} \\
+\num{110}--\num{140} & \num{30} & \num{300} \\
+\num{140}--\num{170} & \num{30} & \num{300} \\
+\num{170}--\num{200} & \num{30} & \num{300} \\
+\num{200}--\num{220} & \num{20} & \num{200} \\
+\num{220}--\num{250} & \num{30} & \num{300} \\
+\num{250}--\num{270} & \num{20} & \num{200} \\
+\num{270}--\num{300} & \num{30} & \num{300} \\
+\num{300}--\num{330} & \num{30} & \num{300} \\
 \midrule
-\multicolumn{2}{c}{Mean distance} & $\num{17.333} \pm \num{6.976}$ \\
+\multicolumn{2}{c}{Mean corrected distance} & $\num{273} \pm \num{47}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
-This leads to a mean distance between strips of $d_{\text{strip}}=\left(\num{17.3} \pm \num{7.0}\right)\si{\micro\meter}$. The extension of the laser is estimated from the full width at half maximum of the focused strip peaks and is about $\SI{10}{\micro\meter}$.\\\\
+This leads to a mean distance between strips of $d_{\text{strip}}=\left(\num{27.3} \pm \num{4.7}\right)\si{\micro\meter}$ with the assumed step size. This value is too small for the strip distance, so the micrometer was probably changed in a different way than assumed during the measurement. If the micrometer was actually moved by $\SI{100}{\micro\meter}$ per measurement, this value has to be multiplied by ten and becomes $d_{\text{strip}}=\left(\num{273} \pm \num{47}\right)\si{\micro\meter}$. This is only a rough estimate and is larger than the expected distance between strips, because the large step size makes it difficult to identify the real minima. The strip width can be estimated from the beginning and the end of such a minimum, while the laser width can be estimated from the distance between leaving a minimum and reaching the maximum between two strips. With the possible $\SI{100}{\micro\meter}$ step size these estimates are very imprecise. The laser extension estimated from the full width at half maximum would also be scaled from about $\SI{10}{\micro\meter}$ to about $\SI{100}{\micro\meter}$.\\\\
 For the charge collection efficiency (CCE) measurement the signal of strip $\num{84}$ is used. The relative CCE is normalized to the mean signal in the high-voltage region above $\SI{120}{\volt}$
 \begin{equation}
     CCE(U)=\frac{S_{84}(U)}{S_{\text{ref}}}, \quad
@@ -117,4 +122,4 @@ This fit results in the fit parameters
     m=\left(\num{0.0006}\pm\num{0.0001}\right)\si{\per\volt},
 \end{equation}
 with the penetration depth $a$, the scaling factor $A$ and the gradient of the plateau $m$. Compared to the gradient of the current-voltage measurement
-$m_{\text{IV}}$, the plateau gradient is much smaller.
+$m_{\text{IV}}$, the plateau gradient is much smaller. Since the fitted penetration depth is slightly larger than the sensor thickness of $\SI{300}{\micro\meter}$, an additional fit only to the increasing part up to $\SI{80}{\volt}$ gives a more physical estimate of $a=\left(\num{309}\pm\num{58}\right)\si{\micro\meter}$.

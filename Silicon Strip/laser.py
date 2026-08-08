@@ -32,9 +32,13 @@ positive_signal = np.clip(laser_scan[:, signal_strips], 0, None)
 summed_signal = np.sum(positive_signal, axis=1)
 
 peak_indices, _ = find_peaks(summed_signal, distance=2, height=50)
+minimum_indices, _ = find_peaks(-summed_signal, distance=1)
 peak_positions = positions[peak_indices]
+minimum_positions = positions[minimum_indices]
 pitch = np.mean(np.diff(peak_positions))
 pitch_std = np.std(np.diff(peak_positions), ddof=1)
+minimum_pitch = np.mean(np.diff(minimum_positions))
+minimum_pitch_std = np.std(np.diff(minimum_positions), ddof=1)
 laser_widths = []
 for strip in signal_strips:
     signal = laser_scan[:, strip]
@@ -80,6 +84,7 @@ print(f"Laser scan data: {laser_scan.shape[0]} positions, {laser_scan.shape[1]} 
 print(f"Optimal laser delay: {optimal_delay:.0f} ns")
 print(f"Relevant strips: {signal_strips.tolist()}")
 print(f"Signal maxima spacing: ({pitch:.1f} +- {pitch_std:.1f}) um")
+print(f"Signal minima spacing: ({minimum_pitch:.1f} +- {minimum_pitch_std:.1f}) um")
 print(
     "Grouped strip spacing from equal-height peaks: "
     f"({grouped_strip_pitch:.1f} +- {grouped_strip_pitch_std:.1f}) um"
@@ -114,6 +119,13 @@ axes[1].plot(
     "x",
     color="tab:red",
     label="Detected maxima",
+)
+axes[1].plot(
+    minimum_positions,
+    summed_signal[minimum_indices],
+    "v",
+    color="tab:green",
+    label="Detected minima",
 )
 axes[1].set_xlabel(r"Laser position $\mathbin{/} \si{\micro\meter}$")
 axes[1].set_ylabel(r"Summed signal $\mathbin{/} \text{ADC}$")
