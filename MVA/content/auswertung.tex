@@ -17,9 +17,9 @@ a Boosted Decision Tree (BDT) is used.
 This BDT is trained on simulated data to distinguish between signal and background events.
 To avoid overtraining,
 the BDT is trained on a subset of features.
-To find the optimal features a Multivariate Analysis (MVA) is performed.
+A feature selection is used to find the optimal features.
 
-\subsection{Multivariable Analysis}
+\subsection{Feature selection}
 \label{sec:MVA}
 The BDT is trained using simulated signal events, 
 while the background is taken directly from data. 
@@ -89,15 +89,17 @@ we use the Punzi significance,
     s = \frac{\epsilon_{\text{sig}}}{5/2 + \sqrt{n_{\text{bkg}}}},
 \end{equation}
 where $\epsilon_{\text{sig}}$ is the signal selection efficiency and $n_{\text{bkg}}$ is the number of background events in the signal region. 
-The result is shown in \autoref{fig:FOM}, 
-where the optimal BDT output threshold is determined to be $0.5$.
+The result is shown in \autoref{fig:FOM}.
+For each fold, the Punzi significance reaches its maximum at a BDT output
+threshold close to $0.99$.
 \begin{figure}
     \centering              
     \includegraphics[width=0.5\textwidth]{bilder/FOM.png}
     \caption{Punzi significance as a function of the BDT output threshold.}
     \label{fig:FOM}
 \end{figure}
-The average best threshold of the five training iterations is at $0.99$.
+The average optimal threshold of the five folds
+is therefore approximately $0.99$.
 
 \autoref{fig:BDT_Threshold} shows the effect of applying the BDT threshold to the data.
 \begin{figure}
